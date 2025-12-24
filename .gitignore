@@ -18,3 +18,4 @@
 /DocumentProcessorApp/DocumentProcessor.Infrastructure/obj
 /DocumentProcessorApp/DocumentProcessor.Application/bin/Debug/net8.0
 /DocumentProcessorApp/DocumentProcessor.Application/obj
+/DocumentProcessorApp/.vs/slnx.sqlite
