@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentProcessor.Applicati
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentProcessor.Functions.KeyScanner", "DocumentProcessor.Functions.KeyScanner\DocumentProcessor.Functions.KeyScanner.csproj", "{EE0F30C1-0B07-4AAA-B0D7-897AA639CDF0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentProcessor.Functions.ExtractPattern", "DocumentProcessor.Functions.ExtractPattern\DocumentProcessor.Functions.ExtractPattern.csproj", "{199F50FA-44FF-43F9-9266-4E6C6DE044BB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{EE0F30C1-0B07-4AAA-B0D7-897AA639CDF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EE0F30C1-0B07-4AAA-B0D7-897AA639CDF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EE0F30C1-0B07-4AAA-B0D7-897AA639CDF0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{199F50FA-44FF-43F9-9266-4E6C6DE044BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{199F50FA-44FF-43F9-9266-4E6C6DE044BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{199F50FA-44FF-43F9-9266-4E6C6DE044BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{199F50FA-44FF-43F9-9266-4E6C6DE044BB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
