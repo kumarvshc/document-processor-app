@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentProcessor.Tests", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentProcessor.Console", "DocumentProcessor.Console\DocumentProcessor.Console.csproj", "{78275B41-F8D9-4076-B2C6-E55D7E72FC46}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentProcessor.Domain", "DocumentProcessor.Domain\DocumentProcessor.Domain.csproj", "{A921571E-A310-479D-BBEA-4E05270507C1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{78275B41-F8D9-4076-B2C6-E55D7E72FC46}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{78275B41-F8D9-4076-B2C6-E55D7E72FC46}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{78275B41-F8D9-4076-B2C6-E55D7E72FC46}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A921571E-A310-479D-BBEA-4E05270507C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A921571E-A310-479D-BBEA-4E05270507C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A921571E-A310-479D-BBEA-4E05270507C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A921571E-A310-479D-BBEA-4E05270507C1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
