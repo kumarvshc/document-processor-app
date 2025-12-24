@@ -10,3 +10,5 @@
 /DocumentProcessorApp/DocumentProcessor.Api/bin/Debug/net8.0
 /DocumentProcessorApp/DocumentProcessor.Api/obj
 /.vs
+/DocumentProcessorApp/DocumentProcessor.Console/bin/Debug/net8.0
+/DocumentProcessorApp/DocumentProcessor.Console/obj

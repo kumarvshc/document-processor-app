@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35919.96 d17.13
+VisualStudioVersion = 17.13.35919.96
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentProcessor.Api", "DocumentProcessor.Api\DocumentProcessor.Api.csproj", "{D99B05EF-A703-47E5-A5D9-010D55855EC9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentProcessor.Tests", "DocumentProcessor.Tests\DocumentProcessor.Tests.csproj", "{B921AFA0-9BD1-4C25-A4DC-537E3D0FA4F8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentProcessor.Console", "DocumentProcessor.Console\DocumentProcessor.Console.csproj", "{78275B41-F8D9-4076-B2C6-E55D7E72FC46}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{B921AFA0-9BD1-4C25-A4DC-537E3D0FA4F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B921AFA0-9BD1-4C25-A4DC-537E3D0FA4F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B921AFA0-9BD1-4C25-A4DC-537E3D0FA4F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78275B41-F8D9-4076-B2C6-E55D7E72FC46}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78275B41-F8D9-4076-B2C6-E55D7E72FC46}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78275B41-F8D9-4076-B2C6-E55D7E72FC46}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78275B41-F8D9-4076-B2C6-E55D7E72FC46}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
