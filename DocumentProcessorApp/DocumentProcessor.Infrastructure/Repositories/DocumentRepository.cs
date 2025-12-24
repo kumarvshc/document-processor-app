@@ -16,7 +16,7 @@ namespace DocumentProcessor.Infrastructure.Repositories
             return await _dbSet.FirstOrDefaultAsync(d => d.FileName == fileName, cancellationToken);
         }
 
-        public async Task<Document> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
+        public async Task<Document> GetByIdWithScanResultsAsync(Guid id, CancellationToken cancellationToken = default)
         {
             return await _dbSet.Include(d => d.ScanResults).FirstOrDefaultAsync(d => d.Id == id, cancellationToken);
         }

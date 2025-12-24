@@ -17,7 +17,8 @@ namespace DocumentProcessor.Infrastructure.Repositories
         }
 
         public IDocumentRepository Documents => _documentRepository ??= new DocumentRepository(_context);
-        public IScanResultRepository SacnResults => _scanResultRepository ??= new ScanResultRepository(_context);
+        public IScanResultRepository ScanResults => _scanResultRepository ??= new ScanResultRepository(_context);
+
 
         public async Task BeginTransactionAsync(CancellationToken cancellationToken = default)
         {
@@ -51,6 +52,31 @@ namespace DocumentProcessor.Infrastructure.Repositories
         }
 
         public Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task IUnitOfWork.BeginTransactionAsync(CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task IUnitOfWork.CommitTransactionAsync(CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IDisposable.Dispose()
+        {
+            throw new NotImplementedException();
+        }
+
+        Task IUnitOfWork.RollbackTransactionAsync(CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<int> IUnitOfWork.SaveChangesAsync(CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }
