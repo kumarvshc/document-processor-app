@@ -14,3 +14,5 @@
 /DocumentProcessorApp/DocumentProcessor.Console/obj
 /DocumentProcessorApp/DocumentProcessor.Domain/bin/Debug/net8.0
 /DocumentProcessorApp/DocumentProcessor.Domain/obj
+/DocumentProcessorApp/DocumentProcessor.Infrastructure/bin/Debug/net8.0
+/DocumentProcessorApp/DocumentProcessor.Infrastructure/obj
