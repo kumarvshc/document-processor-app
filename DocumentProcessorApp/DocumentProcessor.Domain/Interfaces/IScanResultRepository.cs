@@ -4,6 +4,6 @@ namespace DocumentProcessor.Domain.Interfaces
 {
     public interface IScanResultRepository
     {
-        Task<ScanResult> GeDocumentScanStatusAsync(Guid documentId, CancellationToken cancellation = default);
+        Task<IEnumerable<ScanResult>> GeDocumentScanStatusAsync(Guid documentId, CancellationToken cancellationToken = default);
     }
 }
