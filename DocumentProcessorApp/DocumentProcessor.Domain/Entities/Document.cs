@@ -11,6 +11,9 @@ namespace DocumentProcessor.Domain.Entities
         public DateTime CreatedDateTime { get; private set; }
         public DateTime ProcessedDateTime { get; private set; }
 
+        private readonly List<ScanResult> _scanResults = [];
+        public IReadOnlyCollection<ScanResult> ScanResults => _scanResults.AsReadOnly();
+
         private Document()
         {
 
@@ -32,6 +35,22 @@ namespace DocumentProcessor.Domain.Entities
                 Status = DocumentStatus.Processing,
                 CreatedDateTime = DateTime.UtcNow
             };
+        }
+
+        public void AddScanResult(ScanResult scanResult)
+        {
+            _scanResults.Add(scanResult);
+        }
+
+        public void MarkAsAvailable()
+        {
+            Status = DocumentStatus.Available;
+            ProcessedDateTime = DateTime.UtcNow;
+        }
+
+        public void MarkAsProcessing()
+        {
+            Status = DocumentStatus.Processing;
         }
     }
 }
