@@ -16,6 +16,7 @@ namespace DocumentProcessor.Api.Mapping
             // Response
             CreateMap<DocumentResponse, AddDocumentApiResponse>();
             CreateMap<DocumentStatusResponse, DocumentStatusApiResponse>();
+            CreateMap<DocumentTextResponse, DocumentTextApiResponse>();
         }
     }
 }

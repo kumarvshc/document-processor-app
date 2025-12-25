@@ -6,6 +6,7 @@ using DocumentProcessor.Application.DTO.Response;
 using DocumentProcessor.Application.ServiceInterfaces;
 using DocumentProcessor.Common;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Rewrite;
 
 namespace DocumentProcessor.Api.Controllers
 {
@@ -40,12 +41,13 @@ namespace DocumentProcessor.Api.Controllers
 
             var result = await _documentService.AddDocumentAsync(applicationRequest, cancellationToken);
 
-            if (result.IsSuccess && result.Value is not null)
+            if (result.IsSuccess)
             {
                 var responseDto = _mapper.Map<AddDocumentApiResponse>(result.Value);
                 return Ok(responseDto);
             }
-            return StatusCode(result.StatusCode, ToProblemResult(result.StatusCode, result.Error, HttpContext));
+
+            return StatusCode(result.StatusCode, CreateProblemDetails(result.StatusCode, result.Error, HttpContext));
         }
 
 
@@ -59,31 +61,51 @@ namespace DocumentProcessor.Api.Controllers
         {
             var result = await _documentService.GetDocumentStatusAsync(id, cancellationToken);
 
-            if (result.IsSuccess && result.Value is not null)
+            if (result.IsSuccess)
             {
                 var responseDto = _mapper.Map<DocumentStatusApiResponse>(result.Value);
 
                 return Ok(responseDto);
             }
-            return StatusCode(result.StatusCode, ToProblemResult(result.StatusCode, result.Error, HttpContext));           
+
+            return StatusCode(result.StatusCode, CreateProblemDetails(result.StatusCode, result.Error, HttpContext));           
         }
 
-        private IActionResult ToProblemResult(int statusCode, string? error, HttpContext httpContext)
+        [HttpGet("{id}/text")]
+        [ProducesResponseType(typeof(DocumentTextApiResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status422UnprocessableEntity)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> GetDocumentText(Guid id, CancellationToken cancellationToken)
         {
-            var problem = new ProblemDetails
+            var result = await _documentService.GetDocumentTextAsync(id, cancellationToken);
+
+            if(result.IsSuccess)
+            {
+                var responseDto = _mapper.Map<DocumentTextApiResponse>(result.Value);
+
+                return Ok(responseDto);
+            }
+
+            return StatusCode(result.StatusCode, CreateProblemDetails(result.StatusCode, result.Error, HttpContext));
+        }
+
+        private ProblemDetails CreateProblemDetails(int statusCode, string? error, HttpContext httpContext)
+        {
+            return new ProblemDetails
             {
                 Status = statusCode,
                 Title = statusCode switch
                 {
                     StatusCodes.Status422UnprocessableEntity => "Business Rule Violation",
+                    StatusCodes.Status400BadRequest => "Bad Request",
                     StatusCodes.Status500InternalServerError => "Internal Server Error",
                     _ => "Error"
                 },
                 Detail = error,
                 Instance = httpContext?.Request?.Path
             };
-
-            return new ObjectResult(problem) { StatusCode = statusCode };
         }
 
     }

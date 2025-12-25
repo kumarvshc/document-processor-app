@@ -5,6 +5,7 @@ using DocumentProcessor.Common;
 using DocumentProcessor.Domain.Entities;
 using DocumentProcessor.Domain.Enums;
 using DocumentProcessor.Domain.Interfaces;
+using System.Net.Http.Headers;
 
 namespace DocumentProcessor.Application.Services
 {
@@ -40,7 +41,7 @@ namespace DocumentProcessor.Application.Services
 
             if(document is null)
             {
-                return null;
+                return Result<DocumentMatchesResponse>.Failure("Cannot find document for the given document id.");
             }
             var matches = document.ScanResults.Select(s => new ScanResultResponse(
                 s.Id,
@@ -58,7 +59,7 @@ namespace DocumentProcessor.Application.Services
 
             if(document is null)
             {
-                return Result<DocumentStatusResponse>.Success(new DocumentStatusResponse(documentId, DocumentStatus.Unknown));
+                return Result<DocumentStatusResponse>.Failure("Cannot find document for the given document id.");
             }
 
             return Result<DocumentStatusResponse>.Success(new DocumentStatusResponse(document.Id, document.Status));
@@ -66,11 +67,11 @@ namespace DocumentProcessor.Application.Services
 
         public async Task<Result<DocumentTextResponse>> GetDocumentTextAsync(Guid documentId, CancellationToken cancellationToken = default)
         {
-            var document = await _unitOfWork.Documents.GetByIdWithScanResultsAsync(documentId, cancellationToken);
+            var document = await _unitOfWork.Documents.GetByIdAsync(documentId, cancellationToken);
 
             if(document is null)
             {
-                return null;
+                return Result<DocumentTextResponse>.Failure("Cannot find document for the given document id.");
             }
 
             return Result<DocumentTextResponse>.Success(new DocumentTextResponse(document.Id, document.FileName, document.Content));
