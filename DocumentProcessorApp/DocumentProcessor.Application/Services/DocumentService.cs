@@ -2,9 +2,7 @@
 using DocumentProcessor.Application.DTO.Response;
 using DocumentProcessor.Application.ServiceInterfaces;
 using DocumentProcessor.Common;
-using DocumentProcessor.Domain.Entities;
 using DocumentProcessor.Domain.Interfaces;
-using System.Reflection.Metadata;
 
 namespace DocumentProcessor.Application.Services
 {
