@@ -6,7 +6,7 @@ namespace DocumentProcessor.Application.DTO.Response;
     Guid Id,
     string FileName,
     DocumentStatus Status,
-    DateTime CreatedAt,
-    DateTime? ProcessedAt
+    DateTime CreatedDateTime,
+    DateTime? ProcessedDateTime
 );
 

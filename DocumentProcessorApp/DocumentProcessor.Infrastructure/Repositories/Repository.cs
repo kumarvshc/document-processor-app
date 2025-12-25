@@ -25,7 +25,7 @@ namespace DocumentProcessor.Infrastructure.Repositories
             return await _dbSet.ToListAsync(cancellationToken);
         }
 
-        public virtual async Task<T> GetByIdWithScanResultsAsync(Guid id, CancellationToken cancellationToken)
+        public virtual async Task<T> GetByIdAsync(Guid id, CancellationToken cancellationToken)
         {
             return await _dbSet.FindAsync([id], cancellationToken);
         }
