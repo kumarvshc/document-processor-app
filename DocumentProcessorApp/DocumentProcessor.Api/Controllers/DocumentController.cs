@@ -14,8 +14,9 @@ namespace DocumentProcessor.Api.Controllers
         private readonly IMapper _mapper;
         private readonly IDocumentService _documentService;
 
-        public DocumentController(IDocumentService documentService)
+        public DocumentController(IMapper mapper, IDocumentService documentService)
         {
+            _mapper = mapper;
             _documentService = documentService;
         }
 

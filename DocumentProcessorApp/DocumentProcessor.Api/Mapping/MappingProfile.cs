@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using DocumentProcessor.Api.DTO.Request;
 using DocumentProcessor.Application.DTO.Request;
 
 namespace DocumentProcessor.Api.Mapping
@@ -8,7 +9,7 @@ namespace DocumentProcessor.Api.Mapping
         public MappingProfile()
         {
             // Request mappings (API -> Application)
-            //CreateMap<DocumentApiRequest, AddDocumentRequest>();
+            CreateMap<AddDocumentApiRequest, AddDocumentRequest>();
         }
     }
 }

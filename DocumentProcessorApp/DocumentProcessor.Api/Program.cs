@@ -6,6 +6,7 @@ using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
+using System.Text.Json.Serialization;
 
 
 Log.Logger = new LoggerConfiguration()
@@ -24,18 +25,6 @@ Log.Logger = new LoggerConfiguration()
 try
 {
     var builder = WebApplication.CreateBuilder(args);
-
-    // Add DbContext   
-    var connectionString = builder.Configuration.GetConnectionString("SqlConnection")
-              ?? throw new InvalidOperationException("Sql ConnectionString missing");
-    builder.Services.AddDbContext<DocumentProcessorDbContext>(options =>
-        options.UseSqlServer(connectionString, sqlOptions =>
-        {
-            sqlOptions.EnableRetryOnFailure(
-                maxRetryCount: 3,
-                maxRetryDelay: TimeSpan.FromSeconds(30),
-                errorNumbersToAdd: null);
-        }));
 
     // Add Serilog
     builder.Host.UseSerilog();
@@ -62,9 +51,13 @@ try
         });
     });
 
-   
+    builder.Services.RegisterDependencies(builder);
 
-    builder.Services.RegisterDependencies();
+    // Display the enum text instead of number
+    builder.Services.AddControllers().AddJsonOptions(opt =>
+    {
+        opt.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+    });
 
     var app = builder.Build();
 
