@@ -1,7 +1,8 @@
 ﻿using AutoMapper;
+using DocumentProcessor.Api.DTO.Request;
+using DocumentProcessor.Application.DTO.Request;
 using DocumentProcessor.Application.DTO.Response;
 using DocumentProcessor.Application.ServiceInterfaces;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DocumentProcessor.Api.Controllers
@@ -17,6 +18,24 @@ namespace DocumentProcessor.Api.Controllers
         {
             _documentService = documentService;
         }
+
+        [HttpPost]
+        [ProducesResponseType(typeof(DocumentResponse), StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> AddDocument([FromBody] AddDocumentApiRequest request, CancellationToken cancellationToken)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var applicationRequest = _mapper.Map<AddDocumentRequest>(request);
+
+            var result = await _documentService.AddDocumentAsync(applicationRequest, cancellationToken);
+
+            return CreatedAtAction(nameof(GetDocumentStatus), new { id = result.Id }, result);
+        }
+
 
         [HttpGet("{id}/status")]
         [ProducesResponseType(typeof(DocumentStatusResponse), StatusCodes.Status200OK)]

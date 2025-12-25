@@ -16,7 +16,7 @@ namespace DocumentProcessor.Application.Services
             _unitOfWork = unitOfWork;
         }
         
-        public async Task<DocumentResponse> AddDocumentAsync(DocumentRequest request, CancellationToken cancellationToken = default)
+        public async Task<DocumentResponse> AddDocumentAsync(AddDocumentRequest request, CancellationToken cancellationToken = default)
         {
             var document = Document.Create(request.FileName, request.Content, request.MaxContextSize);
 

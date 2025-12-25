@@ -51,34 +51,10 @@ namespace DocumentProcessor.Infrastructure.Repositories
             }
         }
 
-        public Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            return await _context.SaveChangesAsync(cancellationToken);
         }
 
-        Task IUnitOfWork.BeginTransactionAsync(CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
-        }
-
-        Task IUnitOfWork.CommitTransactionAsync(CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
-        }
-
-        void IDisposable.Dispose()
-        {
-            throw new NotImplementedException();
-        }
-
-        Task IUnitOfWork.RollbackTransactionAsync(CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
-        }
-
-        Task<int> IUnitOfWork.SaveChangesAsync(CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
