@@ -13,7 +13,7 @@ namespace DocumentProcessor.Api.DTO.Request
         public string Content { get; set; } = string.Empty;
 
         [Required]
-        public int MaxContextSize { get; set; }
+        public int MaxContentSize { get; set; }
 
         public Dictionary<string, string>? Metadata { get; set; }
     }

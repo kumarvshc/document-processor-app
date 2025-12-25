@@ -90,7 +90,10 @@ namespace DocumentProcessor.Api.Controllers
 
         [HttpGet("{documentId}/matches")]
         [ProducesResponseType(typeof(DocumentMatchesApiResponse), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status422UnprocessableEntity)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetDocumentMatches(Guid documentId, CancellationToken cancellationToken)
         {
             var result = await _documentService.GetDocumentMatchesAsync(documentId, cancellationToken);

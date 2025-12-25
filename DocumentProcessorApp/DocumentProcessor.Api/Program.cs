@@ -1,5 +1,6 @@
 // Configure Serilog
 using DocumentProcessor.Api;
+using DocumentProcessor.Api.HealthCheck;
 using DocumentProcessor.Api.Middleware;
 using DocumentProcessor.Infrastructure.Data;
 using FluentValidation;
@@ -33,13 +34,10 @@ try
     builder.Services.AddFluentValidationAutoValidation();
     builder.Services.AddValidatorsFromAssemblyContaining<Program>();
 
-    // Add services to the container.
-
     builder.Services.AddControllers();
 
     // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
     builder.Services.AddEndpointsApiExplorer();
-
 
     builder.Services.AddSwaggerGen(options =>
     {
@@ -50,6 +48,9 @@ try
             Description = "Dcument Processor API "
         });
     });
+
+    // Add Health Checks
+    builder.Services.AddHealthChecks().AddCheck<HealtchCheck>("doc-processor-health-check");
 
     builder.Services.RegisterDependencies(builder);
 
@@ -79,6 +80,9 @@ try
     app.UseSerilogRequestLogging();
 
     app.UseAuthorization();
+
+    // Map Health Checks
+    app.MapHealthChecks("/health");
 
     app.MapControllers();
 

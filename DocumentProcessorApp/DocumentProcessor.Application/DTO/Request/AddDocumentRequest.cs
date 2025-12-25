@@ -3,6 +3,6 @@
 public record AddDocumentRequest(
     string FileName,
     string Content,
-    int MaxContextSize,
+    int MaxContentSize,
     Dictionary<string, string>? Metadata = null
 );
