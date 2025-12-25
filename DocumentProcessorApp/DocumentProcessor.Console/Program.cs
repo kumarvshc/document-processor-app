@@ -99,6 +99,8 @@ do
     Console.WriteLine($"Successful: {successCount}");
     Console.WriteLine($"Failed: {failCount}");
 
+    successCount = failCount = 0;
+
     Console.WriteLine("\nDo you want to process files again? (Y/N): ");
     var input = Console.ReadLine();
     continueProcessing = input?.Trim().ToUpper() == "Y";
