@@ -21,3 +21,5 @@
 /DocumentProcessorApp/.vs/slnx.sqlite
 /DocumentProcessorApp/DocumentProcessor.Api/logs
 /DocumentProcessorApp/.vs
+/DocumentProcessorApp/DocumentProcessor.Common/bin/Debug/net8.0
+/DocumentProcessorApp/DocumentProcessor.Common/obj

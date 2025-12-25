@@ -17,10 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DTO\Response\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\DocumentProcessor.Application\DocumentProcessor.Application.csproj" />
     <ProjectReference Include="..\DocumentProcessor.Infrastructure\DocumentProcessor.Infrastructure.csproj" />
   </ItemGroup>
