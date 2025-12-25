@@ -2,11 +2,8 @@
 using DocumentProcessor.Api.DTO.Request;
 using DocumentProcessor.Api.DTO.Response;
 using DocumentProcessor.Application.DTO.Request;
-using DocumentProcessor.Application.DTO.Response;
 using DocumentProcessor.Application.ServiceInterfaces;
-using DocumentProcessor.Common;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Rewrite;
 
 namespace DocumentProcessor.Api.Controllers
 {
