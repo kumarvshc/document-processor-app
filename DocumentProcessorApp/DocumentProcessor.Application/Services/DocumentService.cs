@@ -55,7 +55,7 @@ namespace DocumentProcessor.Application.Services
 
         public async Task<Result<DocumentStatusResponse>> GetDocumentStatusAsync(Guid documentId, CancellationToken cancellationToken = default)
         {
-            var document = await _unitOfWork.Documents.GetByIdWithScanResultsAsync(documentId, cancellationToken);
+            var document = await _unitOfWork.Documents.GetByIdAsync(documentId, cancellationToken);
 
             if(document is null)
             {
