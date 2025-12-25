@@ -23,3 +23,5 @@
 /DocumentProcessorApp/.vs
 /DocumentProcessorApp/DocumentProcessor.Common/bin/Debug/net8.0
 /DocumentProcessorApp/DocumentProcessor.Common/obj
+/DocumentProcessorApp/DocumentProcessor.Constants/bin/Debug/net8.0
+/DocumentProcessorApp/DocumentProcessor.Constants/obj

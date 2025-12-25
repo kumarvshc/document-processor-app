@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentProcessor.Functions
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentProcessor.Common", "DocumentProcessor.Common\DocumentProcessor.Common.csproj", "{0B0E091B-D0A7-40C8-B885-53A34560F3C2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentProcessor.Constants", "DocumentProcessor.Constants\DocumentProcessor.Constants.csproj", "{98748A68-742C-467E-98D2-B040ECAC589B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{0B0E091B-D0A7-40C8-B885-53A34560F3C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0B0E091B-D0A7-40C8-B885-53A34560F3C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0B0E091B-D0A7-40C8-B885-53A34560F3C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98748A68-742C-467E-98D2-B040ECAC589B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98748A68-742C-467E-98D2-B040ECAC589B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98748A68-742C-467E-98D2-B040ECAC589B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98748A68-742C-467E-98D2-B040ECAC589B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

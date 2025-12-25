@@ -1,8 +1,10 @@
-﻿using DocumentProcessor.Api.Mapping;
+﻿using Azure.Messaging.ServiceBus;
+using DocumentProcessor.Api.Mapping;
 using DocumentProcessor.Application.ServiceInterfaces;
 using DocumentProcessor.Application.Services;
 using DocumentProcessor.Domain.Interfaces;
 using DocumentProcessor.Infrastructure.Data;
+using DocumentProcessor.Infrastructure.Messaging;
 using DocumentProcessor.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 
@@ -35,7 +37,13 @@ namespace DocumentProcessor.Api
 
             // Add Application Services
             services.AddScoped<IDocumentService, DocumentService>();
-           
+
+            // Service Bus
+            var serviceBusConnection = builder.Configuration.GetConnectionString("ServiceBusConnection")
+                      ?? throw new InvalidOperationException("Service Bus Connection missing");
+            services.AddSingleton(new ServiceBusClient(serviceBusConnection));
+            services.AddSingleton<IMessagePublisher, ServiceBusMessagePublisher>();
+
             return services;
         }
     }
