@@ -10,7 +10,6 @@ namespace DocumentProcessor.Domain.Entities
         public int Position { get;private set; }
         public string MatchedText { get; private set; } = string.Empty;
         public DateTime CreatedDateTime { get; private set; }
-        public Document Document { get;private set; }
 
         private ScanResult()
         {

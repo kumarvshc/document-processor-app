@@ -20,7 +20,7 @@ namespace DocumentProcessor.Application.Services
         
         public async Task<Result<DocumentResponse>> AddDocumentAsync(AddDocumentRequest request, CancellationToken cancellationToken = default)
         {
-            var document = Document.Create(request.FileName, request.Content, request.MaxContextSize);
+            var document = Document.Create(request.FileName, request.Content, request.Metadata, request.MaxContextSize);
 
             await _unitOfWork.Documents.AddAsync(document, cancellationToken);
 

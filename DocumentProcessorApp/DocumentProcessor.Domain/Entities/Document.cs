@@ -1,4 +1,5 @@
 ﻿using DocumentProcessor.Domain.Enums;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DocumentProcessor.Domain.Entities
 {
@@ -7,6 +8,8 @@ namespace DocumentProcessor.Domain.Entities
         public Guid Id { get; private set; }
         public string FileName { get; private set; } = string.Empty;
         public string Content { get; private set; } = string.Empty;
+        [NotMapped]
+        public Dictionary<string, string> Metadata { get; private set; } = new();
         public DocumentStatus Status { get; private set; }
         public DateTime CreatedDateTime { get; private set; }
         public DateTime ProcessedDateTime { get; private set; }
@@ -19,7 +22,7 @@ namespace DocumentProcessor.Domain.Entities
 
         }
 
-        public static Document Create(string fileName, string content, int maxContentSize = 1024)
+        public static Document Create(string fileName, string content, Dictionary<string,string> metadata, int maxContentSize = 1024)
         {
             if (string.IsNullOrWhiteSpace(fileName))
                 throw new ArgumentException("File name cannot be empty.", nameof(fileName));
@@ -32,6 +35,7 @@ namespace DocumentProcessor.Domain.Entities
                 Id = Guid.NewGuid(),
                 FileName = fileName,
                 Content = content,
+                Metadata = new Dictionary<string, string>(metadata ?? new()),
                 Status = DocumentStatus.Processing,
                 CreatedDateTime = DateTime.UtcNow
             };
