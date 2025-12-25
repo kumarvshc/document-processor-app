@@ -88,6 +88,24 @@ namespace DocumentProcessor.Api.Controllers
             return StatusCode(result.StatusCode, CreateProblemDetails(result.StatusCode, result.Error, HttpContext));
         }
 
+        [HttpGet("{documentId}/matches")]
+        [ProducesResponseType(typeof(DocumentMatchesApiResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> GetDocumentMatches(Guid documentId, CancellationToken cancellationToken)
+        {
+            var result = await _documentService.GetDocumentMatchesAsync(documentId, cancellationToken);
+
+            if (result.IsSuccess)
+            {
+                var responseDto = _mapper.Map<DocumentMatchesApiResponse>(result.Value);
+                
+                return Ok(responseDto);
+            }
+
+            return StatusCode(result.StatusCode, CreateProblemDetails(result.StatusCode, result.Error, HttpContext));
+        }
+
+
         private ProblemDetails CreateProblemDetails(int statusCode, string? error, HttpContext httpContext)
         {
             return new ProblemDetails

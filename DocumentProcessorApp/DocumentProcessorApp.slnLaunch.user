@@ -1,0 +1,11 @@
+[
+  {
+    "Name": "New Profile",
+    "Projects": [
+      {
+        "Path": "DocumentProcessor.Api\\DocumentProcessor.Api.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]
