@@ -217,3 +217,20 @@ dotnet run
 - Add comprehensive unit tests for all components.
 - A CI/CD pipeline should be created.
 - Optionally, create an Azure App Service and host the API.
+
+---
+
+## Technology Selection
+
+### .NET Core (ASP.NET Core)
+Chosen for its high performance, cross-platform support, and LTS. It fits well with Clean Architecture and integrates seamlessly with Azure services.
+
+### Azure SQL Database
+Selected as a fully managed, reliable relational database with strong transactional support, and native compatibility with Entity Framework Core.
+
+### Azure Service Bus
+Used for reliable, asynchronous messaging to decouple components and support distributed document processing with guaranteed message delivery.
+
+### Azure Functions
+Adopted for serverless, event-driven background processing. Functions automatically scale, and efficiently process Service Bus messages.
+
