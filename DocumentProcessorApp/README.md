@@ -66,6 +66,7 @@ The **Document Processor** application is designed with a clean and maintainable
 This architecture ensures clarity, testability, and adherence to best practices like **SOLID principles** and **clean architecture**.
 
 Additionaly created **Common** and **Conatants** layer to supporting maintain clean architecture. 
+
 ---
 
 # Document Processor System
