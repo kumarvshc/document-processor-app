@@ -166,24 +166,11 @@ The application can be executed using either of the following approaches:
 
 ---
 
-## Architectural Highlights
-
-- Clean Architecture:
-  - **API → Application → Infrastructure → Domain**
-- Clear separation of concerns
-- DTO isolation between layers
-- **FluentValidation** for input validation
-- **AutoMapper** for DTO mapping
-- **Result Pattern** for consistent error and success handling
-- **Azure Service Bus** for asynchronous messaging
-- **Azure Functions** for scalable background processing
-
----
-
 ## Status Flow
 
 ```text
 Created → Processing → Available
+```
 
 ---
 
