@@ -30,19 +30,19 @@ The application reads files from a specified folder path and processes them sequ
 ---
 
 ## Design Patterns
-- **Factory Pattern** – For object creation.
-- **Repository Pattern** – For data access abstraction.
-- **Unit of Work** – For managing transactions.
-- **Dependency Injection** – For loose coupling and testability.
-- **Result Pattern** – For consistent operation results.
+- **Factory Pattern** â€“ For object creation.
+- **Repository Pattern** â€“ For data access abstraction.
+- **Unit of Work** â€“ For managing transactions.
+- **Dependency Injection** â€“ For loose coupling and testability.
+- **Result Pattern** â€“ For consistent operation results.
 
 ---
 
 ## Design Principles
-- **SOLID** – Maintainable and scalable code.
-- **KISS** – Keep it simple and straightforward.
-- **DRY** – Avoid code duplication.
-- **YAGNI** – Implement only what is necessary.
+- **SOLID** â€“ Maintainable and scalable code.
+- **KISS** â€“ Keep it simple and straightforward.
+- **DRY** â€“ Avoid code duplication.
+- **YAGNI** â€“ Implement only what is necessary.
 
 ---
 
@@ -65,6 +65,125 @@ The **Document Processor** application is designed with a clean and maintainable
 
 This architecture ensures clarity, testability, and adherence to best practices like **SOLID principles** and **clean architecture**.
 
+Additionaly created **Common** and **Conatants** layer to supporting maintain clean architecture. 
+---
+
+# Document Processor System
+
+This project implements a scalable **Document Processing System** following **Clean Architecture** principles with synchronous and asynchronous (distributed) processing.
+
+---
+
+## Application Execution Options
+
+The application can be executed using either of the following approaches:
+
+- **Console Application**
+- **Swagger (API UI)**
+
+---
+
+## Console Application Flow
+
+- The Console application reads files from a predefined directory.
+- The file path is **hardcoded in `Program.cs`**.
+- Files are processed **one by one**.
+- For each file:
+  - A request body is constructed.
+  - The request is sent to the **Document Processor API**.
+
+---
+
+## API Layer Flow
+
+- The **Document Processor API** receives the request.
+- The request body is validated using **FluentValidation**.
+- After successful validation:
+  - The API maps the **API Request DTO** to an **Application DTO (record type)** using **AutoMapper**.
+- The API invokes the **Application layer** to execute business logic.
+
+---
+
+## Application Layer Flow
+
+- The Application layer:
+  - Orchestrates the business workflow.
+  - Coordinates interactions between layers.
+  - Calls the **Infrastructure layer** when persistence or Azure service bus.
+- The Application layer does **not** directly access the database.
+
+---
+
+## Infrastructure Layer Flow
+
+- The Infrastructure layer:
+  - Binds the **DbContext**.
+  - Performs all database-related operations.
+  - Executes actual business data operations using **Domain Entities**.
+- The Infrastructure layer returns results back to the Application layer.
+
+---
+
+## Result Handling Flow
+
+- The Application layer:
+  - Wraps responses using the **Result Pattern** (Success / Failure).
+  - Returns the result to the API layer.
+- The API layer:
+  - Validates the Result pattern.
+  - Maps the Application result to an **API Response DTO**.
+  - Returns the final response to the client.
+
+---
+
+## Distributed Processing Flow
+
+### Document Creation (Asynchronous Processing)
+
+- When a **Create Document** request is processed:
+  - The Application layer publishes a message to an **Azure Service Bus Queue**.
+
+---
+
+### Scanner Azure Function
+
+- The **Scanner Azure Function** is triggered when a message is received in the queue.
+- It performs the following steps:
+  - Scans the document for **dangerous keywords**.
+  - Persists the scan results into the database via the Application layer.
+  - Publishes the same message to the **Extract Pattern Queue**.
+
+---
+
+### Extract Pattern Azure Function
+
+- The **Extract Pattern Azure Function** is triggered by messages from the Extract Pattern Queue.
+- It performs:
+  - **Regular expression pattern matching**.
+  - Inserts extracted pattern data into the database.
+  - Updates the document status from **Processing** to **Available**.
+
+---
+
+## Architectural Highlights
+
+- Clean Architecture:
+  - **API â†’ Application â†’ Infrastructure â†’ Domain**
+- Clear separation of concerns
+- DTO isolation between layers
+- **FluentValidation** for input validation
+- **AutoMapper** for DTO mapping
+- **Result Pattern** for consistent error and success handling
+- **Azure Service Bus** for asynchronous messaging
+- **Azure Functions** for scalable background processing
+
+---
+
+## Status Flow
+
+```text
+Created â†’ Processing â†’ Available
+
 ---
 
 ## Requirements
@@ -72,6 +191,7 @@ This architecture ensures clarity, testability, and adherence to best practices 
 - FluentValidation for input validation
 - Serilog for structured logging
 - AutoMapper for DTO mapping
+- Swagger for Api testing
 - Moq for unit testing and mocking
 - Azure Service Bus for messaging
 - Azure SQL Database for data storage
@@ -107,3 +227,5 @@ dotnet run
 - Remove hardcoded values and maintain them in a centralized constant class or xml file.
 - Replace hardcoded SQL and Azure Service Bus connection strings with Managed Identity or Azure Key Vault.
 - Add comprehensive unit tests for all components.
+- A CI/CD pipeline should be created.
+- Optionally, create an Azure App Service and host the API.
