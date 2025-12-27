@@ -234,3 +234,14 @@ Used for reliable, asynchronous messaging to decouple components and support dis
 ### Azure Functions
 Adopted for serverless, event-driven background processing. Functions automatically scale, and efficiently process Service Bus messages.
 
+---
+
+# Design Trade-Off
+
+Instead of passing only the **Document ID** to the Azure Service Bus queue (since the document content already exists in the `Documents` table), we are currently passing the **document content** itself.
+
+## Reason
+- The content size is small (maximum **1 KB**), so including it in the message reduces the need for an additional database lookup.
+- This approach minimizes latency and simplifies processing at the consumer end.
+
+---
