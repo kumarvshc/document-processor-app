@@ -12,7 +12,7 @@ namespace DocumentProcessor.Functions.ExtractPattern
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        private static readonly Regex PatternRegex = new Regex(@"[A-Z]{2,3}\d{3,5}", RegexOptions.Compiled);
+        private static readonly Regex PatternRegex = new Regex(Constants.Constants.CONST_REGEX_PATTERN, RegexOptions.Compiled);
 
         public ExtractPatternFunction(IUnitOfWork unitOfWork)
         {
@@ -20,10 +20,7 @@ namespace DocumentProcessor.Functions.ExtractPattern
         }
 
         [Function(nameof(ExtractPatterns))]
-        public async Task ExtractPatterns(
-            [ServiceBusTrigger(Constants.Constants.CONST_PATTERN_EXTRACT_QUEUE_NAME, Connection = "ServiceBusConnection")]
-        ServiceBusReceivedMessage message,
-            CancellationToken cancellationToken)
+        public async Task ExtractPatterns([ServiceBusTrigger(Constants.Constants.CONST_PATTERN_EXTRACT_QUEUE_NAME, Connection = "ServiceBusConnection")] ServiceBusReceivedMessage message, CancellationToken cancellationToken)
         {
             var scanMessage = message.Body.ToObjectFromJson<ScanCompletedMessage>();
 

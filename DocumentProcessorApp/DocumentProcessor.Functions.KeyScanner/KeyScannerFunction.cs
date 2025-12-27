@@ -28,7 +28,7 @@ namespace DocumentProcessor.Functions.KeyScanner
 
             var contentLower = content.ToLowerInvariant();
 
-            const string searchWord = "dangerous";
+            const string searchWord = Constants.Constants.CONST_KEYWORD_SCAN;
 
             var index = 0;
 
