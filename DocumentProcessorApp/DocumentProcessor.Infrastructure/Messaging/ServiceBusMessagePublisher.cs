@@ -4,7 +4,7 @@ using DocumentProcessor.Domain.Messages;
 
 namespace DocumentProcessor.Infrastructure.Messaging
 {
-    public class ServiceBusMessagePublisher : IMessagePublisher
+    public class ServiceBusMessagePublisher : IServiceBusMessagePublisher
     {
         private readonly ServiceBusSender _keyScanQueueSender;
         private readonly ServiceBusSender _patternExtractQueueSender;

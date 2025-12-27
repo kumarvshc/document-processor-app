@@ -21,12 +21,12 @@ var host = new HostBuilder()
         services.AddScoped<IUnitOfWork, UnitOfWork>();
 
         // Add Document Services
-        services.AddScoped<IMessageService, DocumentService>();
+        services.AddScoped<IMessageService, MessageService>();
 
         // Add Service Bus
         var serviceBusConnection = Environment.GetEnvironmentVariable("ServiceBusConnection");
         services.AddSingleton(new ServiceBusClient(serviceBusConnection));
-        services.AddSingleton<IMessagePublisher, ServiceBusMessagePublisher>();        
+        services.AddSingleton<IServiceBusMessagePublisher, ServiceBusMessagePublisher>();        
         
     })
     .Build();

@@ -6,15 +6,15 @@ using DocumentProcessor.Domain.Interfaces;
 
 namespace DocumentProcessor.Application.Services
 {
-    public class DocumentService : IDocumentService, IMessageService
+    public class DocumentService : IDocumentService
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IMessagePublisher _messagePublisher;
+        private readonly IMessageService _messageService;
 
-        public DocumentService(IUnitOfWork unitOfWork, IMessagePublisher messagePublisher)
+        public DocumentService(IUnitOfWork unitOfWork, IMessageService messageService)
         {
             _unitOfWork = unitOfWork;
-            _messagePublisher = messagePublisher;
+            _messageService = messageService;
         }
 
         public async Task<Result<DocumentResponse>> AddDocumentAsync(AddDocumentRequest request, CancellationToken cancellationToken = default)
@@ -25,7 +25,7 @@ namespace DocumentProcessor.Application.Services
 
             await _unitOfWork.SaveChangesAsync(cancellationToken);
 
-            await PublishDocumentCreatedAsync(document, cancellationToken);
+            await _messageService.PublishDocumentCreatedAsync(document, cancellationToken);
 
             return Result<DocumentResponse>.Success(new DocumentResponse(
                 document.Id,
@@ -83,16 +83,6 @@ namespace DocumentProcessor.Application.Services
             }
 
             return Result<DocumentTextResponse>.Success(new DocumentTextResponse(document.Id, document.FileName, document.Content));
-        }
-
-        public async Task PublishDocumentCreatedAsync(Domain.Entities.Document document, CancellationToken cancellationToken = default)
-        {
-            await _messagePublisher.PublishDocumentCreatedAsync(document.Id, document.Content, cancellationToken);
-        }
-
-        public async Task PublishScanCompletedAsync(Guid documentId, string content, CancellationToken cancellationToken = default)
-        {
-            await _messagePublisher.PublishScanCompletedAsync(documentId, content, cancellationToken);
         }
     }
 }

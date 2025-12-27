@@ -21,7 +21,7 @@ var host = new HostBuilder()
         // Add Service Bus
         var serviceBusConnection = Environment.GetEnvironmentVariable("ServiceBusConnection");
         services.AddSingleton(new ServiceBusClient(serviceBusConnection));
-        services.AddSingleton<IMessagePublisher, ServiceBusMessagePublisher>();
+        services.AddSingleton<IServiceBusMessagePublisher, ServiceBusMessagePublisher>();
     })
     .Build();
 host.Run();
