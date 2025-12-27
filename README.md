@@ -12,6 +12,19 @@ The application reads files from a specified folder path and processes them sequ
 
 ---
 
+## Requirements
+- .NET 8 or later
+- FluentValidation for input validation
+- Serilog for structured logging
+- AutoMapper for DTO mapping
+- Swagger for Api testing
+- Moq for unit testing and mocking
+- Azure Service Bus for messaging
+- Azure SQL Database for data storage
+- Azure Functions for serverless processing
+
+---
+
 ## Features
 - Distributed architecture for scalability.
 - Supports custom folder paths for file input.
@@ -45,7 +58,6 @@ The application reads files from a specified folder path and processes them sequ
 - **YAGNI** – Implement only what is necessary.
 
 ---
-
 
 ## Architecture
 
@@ -171,19 +183,6 @@ The application can be executed using either of the following approaches:
 ```text
 Created → Processing → Available
 ```
-
----
-
-## Requirements
-- .NET 8 or later
-- FluentValidation for input validation
-- Serilog for structured logging
-- AutoMapper for DTO mapping
-- Swagger for Api testing
-- Moq for unit testing and mocking
-- Azure Service Bus for messaging
-- Azure SQL Database for data storage
-- Azure Functions for serverless processing
 
 ---
 
