@@ -1,6 +1,4 @@
-﻿using DocumentProcessor.Domain.Enums;
-
-namespace DocumentProcessor.Application.DTO.Response;
+﻿namespace DocumentProcessor.Application.DTO.Response;
 
 public record DocumentMatchesResponse(
     Guid DocumentId,

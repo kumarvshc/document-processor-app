@@ -2,7 +2,7 @@
 
 namespace DocumentProcessor.Api.HealthCheck
 {
-    public class HealtchCheck : IHealthCheck
+    public class HealthCheck : IHealthCheck
     {
         public Task<HealthCheckResult> CheckHealthAsync(
             HealthCheckContext context,
