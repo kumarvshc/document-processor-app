@@ -1,4 +1,5 @@
 ﻿using DocumentProcessor.Application.DTO.Request;
+using DocumentProcessor.Application.ServiceInterfaces;
 using DocumentProcessor.Application.Services;
 using DocumentProcessor.Domain.Entities;
 using DocumentProcessor.Domain.Interfaces;
@@ -9,13 +10,13 @@ namespace DocumentProcessor.Tests
     public class DocumentServiceTests
     {
         private readonly Mock<IUnitOfWork> _unitOfWorkMock;
-        private readonly Mock<IMessagePublisher> _messagePublisherMock;
+        private readonly Mock<IMessageService> _messageServiceMock;
         private readonly DocumentService _documentService;
         public DocumentServiceTests()
         {
             _unitOfWorkMock = new Mock<IUnitOfWork>();
-            _messagePublisherMock = new Mock<IMessagePublisher>();
-            _documentService = new DocumentService(_unitOfWorkMock.Object, _messagePublisherMock.Object);
+            _messageServiceMock = new Mock<IMessageService>();
+            _documentService = new DocumentService(_unitOfWorkMock.Object, _messageServiceMock.Object);
         }
 
         [Fact]
@@ -36,7 +37,7 @@ namespace DocumentProcessor.Tests
 
             _unitOfWorkMock.Setup(u => u.SaveChangesAsync(It.IsAny<CancellationToken>())).ReturnsAsync(1);
 
-            _messagePublisherMock.Setup(m => m.PublishDocumentCreatedAsync(It.IsAny<Guid>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<CancellationToken>())).Returns(Task.CompletedTask);
+            _messageServiceMock.Setup(m => m.PublishDocumentCreatedAsync(It.IsAny<Document>(), It.IsAny<CancellationToken>())).Returns(Task.CompletedTask);
 
             var result = await _documentService.AddDocumentAsync(request);
             

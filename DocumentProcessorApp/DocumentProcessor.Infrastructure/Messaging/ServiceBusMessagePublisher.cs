@@ -1,11 +1,10 @@
 ﻿using Azure.Messaging.ServiceBus;
 using DocumentProcessor.Domain.Interfaces;
 using DocumentProcessor.Domain.Messages;
-using System.Text.RegularExpressions;
 
 namespace DocumentProcessor.Infrastructure.Messaging
 {
-    public class ServiceBusMessagePublisher : IMessagePublisher
+    public class ServiceBusMessagePublisher : IServiceBusMessagePublisher
     {
         private readonly ServiceBusSender _keyScanQueueSender;
         private readonly ServiceBusSender _patternExtractQueueSender;
@@ -16,9 +15,9 @@ namespace DocumentProcessor.Infrastructure.Messaging
             _patternExtractQueueSender = client.CreateSender(Constants.Constants.CONST_PATTERN_EXTRACT_QUEUE_NAME);
         }
 
-        public async Task PublishDocumentCreatedAsync(Guid documentId, string fileName, string content, CancellationToken cancellationToken = default)
+        public async Task PublishDocumentCreatedAsync(Guid documentId, string content, CancellationToken cancellationToken = default)
         {
-            var message = new DocumentCreatedMessage(documentId, fileName, content, DateTime.UtcNow);
+            var message = new DocumentCreatedMessage(documentId, content, DateTime.UtcNow);
 
             var sbMessage = new ServiceBusMessage(BinaryData.FromObjectAsJson(message))
             {

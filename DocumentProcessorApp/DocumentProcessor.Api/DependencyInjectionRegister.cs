@@ -37,12 +37,13 @@ namespace DocumentProcessor.Api
 
             // Add Application Services
             services.AddScoped<IDocumentService, DocumentService>();
+            services.AddScoped<IMessageService, MessageService>();
 
             // Service Bus
             var serviceBusConnection = builder.Configuration.GetConnectionString("ServiceBusConnection")
                       ?? throw new InvalidOperationException("Service Bus Connection missing");
             services.AddSingleton(new ServiceBusClient(serviceBusConnection));
-            services.AddSingleton<IMessagePublisher, ServiceBusMessagePublisher>();
+            services.AddSingleton<IServiceBusMessagePublisher, ServiceBusMessagePublisher>();
 
             return services;
         }

@@ -1,4 +1,5 @@
 ﻿using Azure.Messaging.ServiceBus;
+using DocumentProcessor.Application.ServiceInterfaces;
 using DocumentProcessor.Domain.Entities;
 using DocumentProcessor.Domain.Enums;
 using DocumentProcessor.Domain.Interfaces;
@@ -10,12 +11,12 @@ namespace DocumentProcessor.Functions.KeyScanner
     public class KeyScannerFunction
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IMessagePublisher _messagePublisher;
+        private readonly IMessageService _messageService;
 
-        public KeyScannerFunction(IUnitOfWork unitOfWork, IMessagePublisher messagePublisher)
+        public KeyScannerFunction(IUnitOfWork unitOfWork, IMessageService messageService)
         {
             _unitOfWork = unitOfWork;
-            _messagePublisher = messagePublisher;
+            _messageService = messageService;
         }
 
         [Function("KeyScanDocument")]
@@ -53,11 +54,7 @@ namespace DocumentProcessor.Functions.KeyScanner
                 await _unitOfWork.SaveChangesAsync(cancellationToken);
             }
 
-            await _messagePublisher.PublishScanCompletedAsync(
-            documentMessage.DocumentId,
-            documentMessage.Content,            
-            cancellationToken);
-
+            await _messageService.PublishScanCompletedAsync(documentMessage.DocumentId, documentMessage.Content, cancellationToken);
         }
     }
 }
