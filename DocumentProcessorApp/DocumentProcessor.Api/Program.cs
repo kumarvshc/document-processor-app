@@ -1,7 +1,7 @@
 // Configure Serilog
 using DocumentProcessor.Api;
-using DocumentProcessor.Api.HealthCheck;
 using DocumentProcessor.Api.Middleware;
+using DocumentProcessor.Infrastructure.Data;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Serilog;
@@ -46,7 +46,8 @@ try
     });
 
     // Add Health Checks
-    builder.Services.AddHealthChecks().AddCheck<HealthCheck>("doc-processor-health-check");
+    //builder.Services.AddHealthChecks().AddCheck<HealthCheck>("doc-processor-health-check");
+    builder.Services.AddHealthChecks().AddDbContextCheck<DocumentProcessorDbContext>("database-health-check");
 
     builder.Services.RegisterDependencies(builder);
 
