@@ -5,8 +5,6 @@ using DocumentProcessor.Domain.Entities;
 namespace DocumentProcessor.Domain.Interfaces
 {
     public interface IDocumentRepository : IRepository<Document>
-    {
-        Task<Document> GetByIdWithScanResultsAsync(Guid id, CancellationToken cancellationToken = default);        
-        Task<Document> GetAllByFileNameAsync(string fileName, CancellationToken cancellationToken = default);
+    {        
     }
 }

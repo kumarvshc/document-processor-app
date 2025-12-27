@@ -23,8 +23,6 @@ namespace DocumentProcessor.Functions.KeyScanner
         {
             var documentMessage = messagee.Body.ToObjectFromJson<DocumentCreatedMessage>();
 
-            var dangerousMatches = new List<(int Position, string MatchedText)>();
-
             var content = documentMessage.Content;
 
             var contentLower = content.ToLowerInvariant();
@@ -32,6 +30,8 @@ namespace DocumentProcessor.Functions.KeyScanner
             const string searchWord = "dangerous";
 
             var index = 0;
+
+            bool isDangerousFound = false;
 
             while ((index = contentLower.IndexOf(searchWord, index, StringComparison.Ordinal)) != -1)
             {
@@ -42,20 +42,20 @@ namespace DocumentProcessor.Functions.KeyScanner
                     searchWord);
 
                 await _unitOfWork.ScanResults.AddAsync(scanResult, cancellationToken);
-                dangerousMatches.Add((index, searchWord));
+
+                isDangerousFound = true;
+
                 index += searchWord.Length;
             }
 
-            if (dangerousMatches.Count > 0)
+            if (isDangerousFound)
             {
                 await _unitOfWork.SaveChangesAsync(cancellationToken);
             }
 
             await _messagePublisher.PublishScanCompletedAsync(
             documentMessage.DocumentId,
-            documentMessage.Content,
-            dangerousMatches.Count > 0,
-            dangerousMatches,
+            documentMessage.Content,            
             cancellationToken);
 
         }

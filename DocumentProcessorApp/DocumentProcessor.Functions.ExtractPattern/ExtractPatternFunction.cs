@@ -4,7 +4,6 @@ using DocumentProcessor.Domain.Enums;
 using DocumentProcessor.Domain.Interfaces;
 using DocumentProcessor.Domain.Messages;
 using Microsoft.Azure.Functions.Worker;
-using Microsoft.Extensions.Logging;
 using System.Text.RegularExpressions;
 
 namespace DocumentProcessor.Functions.ExtractPattern
