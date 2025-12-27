@@ -14,8 +14,10 @@ var host = new HostBuilder()
         var connectionString = Environment.GetEnvironmentVariable("SqlConnection");
         services.AddDbContext<DocumentProcessorDbContext>(options =>
             options.UseSqlServer(connectionString));
+
         // Add Repositories
         services.AddScoped<IUnitOfWork, UnitOfWork>();
+
         // Add Service Bus
         var serviceBusConnection = Environment.GetEnvironmentVariable("ServiceBusConnection");
         services.AddSingleton(new ServiceBusClient(serviceBusConnection));

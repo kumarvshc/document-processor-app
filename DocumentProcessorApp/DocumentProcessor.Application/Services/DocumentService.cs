@@ -89,5 +89,10 @@ namespace DocumentProcessor.Application.Services
         {
             await _messagePublisher.PublishDocumentCreatedAsync(document.Id, document.Content, cancellationToken);
         }
+
+        public async Task PublishScanCompletedAsync(Guid documentId, string content, CancellationToken cancellationToken = default)
+        {
+            await _messagePublisher.PublishScanCompletedAsync(documentId, content, cancellationToken);
+        }
     }
 }

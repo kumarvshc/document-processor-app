@@ -1,4 +1,6 @@
 ﻿using Azure.Messaging.ServiceBus;
+using DocumentProcessor.Application.ServiceInterfaces;
+using DocumentProcessor.Application.Services;
 using DocumentProcessor.Domain.Interfaces;
 using DocumentProcessor.Infrastructure.Data;
 using DocumentProcessor.Infrastructure.Messaging;
@@ -14,12 +16,21 @@ var host = new HostBuilder()
         var connectionString = Environment.GetEnvironmentVariable("SqlConnection");
         services.AddDbContext<DocumentProcessorDbContext>(options =>
             options.UseSqlServer(connectionString));
+
         // Add Repositories
         services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+        // Add Document Services
+        services.AddScoped<IMessageService, DocumentService>();
+
         // Add Service Bus
         var serviceBusConnection = Environment.GetEnvironmentVariable("ServiceBusConnection");
         services.AddSingleton(new ServiceBusClient(serviceBusConnection));
-        services.AddSingleton<IMessagePublisher, ServiceBusMessagePublisher>();
+        services.AddSingleton<IMessagePublisher, ServiceBusMessagePublisher>();        
+        
     })
     .Build();
 host.Run();
+
+
+

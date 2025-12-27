@@ -1,7 +1,6 @@
 ﻿using Azure.Messaging.ServiceBus;
 using DocumentProcessor.Domain.Interfaces;
 using DocumentProcessor.Domain.Messages;
-using System.Text.RegularExpressions;
 
 namespace DocumentProcessor.Infrastructure.Messaging
 {
