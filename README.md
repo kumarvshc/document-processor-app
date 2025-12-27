@@ -48,7 +48,9 @@ The application reads files from a specified folder path and processes them sequ
 - **Unit of Work** – For managing transactions.
 - **Dependency Injection** – For loose coupling and testability.
 - **Result Pattern** – For consistent operation results.
-
+- **DDD Pattern** – For maintaining clear boundaries, and improving maintainability.
+- **Event-Driven** – For decoupling components and enabling asynchronous communication.
+  
 ---
 
 ## Design Principles
