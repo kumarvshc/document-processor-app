@@ -42,7 +42,7 @@ namespace DocumentProcessor.Application.Services
 
             if (!scanResults.Any())
             {
-                return Result<DocumentMatchesResponse>.Failure("Cannot find scan results for the given document id.");
+                return Result<DocumentMatchesResponse>.NotFound("Cannot find scan results for the given document id.");
             }
 
             var firstResult = scanResults.First();
@@ -67,7 +67,7 @@ namespace DocumentProcessor.Application.Services
 
             if (document is null)
             {
-                return Result<DocumentStatusResponse>.Failure("Cannot find document for the given document id.");
+                return Result<DocumentStatusResponse>.NotFound("Cannot find document for the given document id.");
             }
 
             return Result<DocumentStatusResponse>.Success(new DocumentStatusResponse(document.Id, document.Status));
@@ -79,7 +79,7 @@ namespace DocumentProcessor.Application.Services
 
             if (document is null)
             {
-                return Result<DocumentTextResponse>.Failure("Cannot find document for the given document id.");
+                return Result<DocumentTextResponse>.NotFound("Cannot find document for the given document id.");
             }
 
             return Result<DocumentTextResponse>.Success(new DocumentTextResponse(document.Id, document.FileName, document.Content));

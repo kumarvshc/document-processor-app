@@ -1,7 +1,6 @@
 ﻿using DocumentProcessor.Domain.Entities;
 using DocumentProcessor.Domain.Interfaces;
 using DocumentProcessor.Infrastructure.Data;
-using Microsoft.EntityFrameworkCore;
 
 namespace DocumentProcessor.Infrastructure.Repositories
 {

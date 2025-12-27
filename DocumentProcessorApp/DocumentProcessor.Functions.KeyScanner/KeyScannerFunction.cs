@@ -20,9 +20,9 @@ namespace DocumentProcessor.Functions.KeyScanner
         }
 
         [Function("KeyScanDocument")]
-        public async Task ScanForDangerousContent([ServiceBusTrigger(Constants.Constants.CONST_KEYSCAN_QUEUE_NAME, Connection = "ServiceBusConnection")] ServiceBusReceivedMessage messagee, CancellationToken cancellationToken = default)
+        public async Task ScanForDangerousContent([ServiceBusTrigger(Constants.Constants.CONST_KEYSCAN_QUEUE_NAME, Connection = "ServiceBusConnection")] ServiceBusReceivedMessage message, CancellationToken cancellationToken = default)
         {
-            var documentMessage = messagee.Body.ToObjectFromJson<DocumentCreatedMessage>();
+            var documentMessage = message.Body.ToObjectFromJson<DocumentCreatedMessage>();
 
             var content = documentMessage.Content;
 
