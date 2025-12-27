@@ -46,7 +46,6 @@ try
     });
 
     // Add Health Checks
-    //builder.Services.AddHealthChecks().AddCheck<HealthCheck>("doc-processor-health-check");
     builder.Services.AddHealthChecks().AddDbContextCheck<DocumentProcessorDbContext>("database-health-check");
 
     builder.Services.RegisterDependencies(builder);
@@ -88,7 +87,7 @@ try
 }
 catch (Exception ex)
 {
-    Log.Error(ex, "Application terminated unexpectedly.");
+    Log.Fatal(ex, "Application terminated unexpectedly.");
 }
 finally
 {
