@@ -53,11 +53,7 @@ namespace DocumentProcessor.Functions.KeyScanner
                 await _unitOfWork.SaveChangesAsync(cancellationToken);
             }
 
-            await _messagePublisher.PublishScanCompletedAsync(
-            documentMessage.DocumentId,
-            documentMessage.Content,            
-            cancellationToken);
-
+            await _messagePublisher.PublishScanCompletedAsync(documentMessage.DocumentId, documentMessage.Content, cancellationToken);
         }
     }
 }

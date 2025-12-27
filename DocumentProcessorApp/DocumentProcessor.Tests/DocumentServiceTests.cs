@@ -36,7 +36,7 @@ namespace DocumentProcessor.Tests
 
             _unitOfWorkMock.Setup(u => u.SaveChangesAsync(It.IsAny<CancellationToken>())).ReturnsAsync(1);
 
-            _messagePublisherMock.Setup(m => m.PublishDocumentCreatedAsync(It.IsAny<Guid>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<CancellationToken>())).Returns(Task.CompletedTask);
+            _messagePublisherMock.Setup(m => m.PublishDocumentCreatedAsync(It.IsAny<Guid>(), It.IsAny<string>(), It.IsAny<CancellationToken>())).Returns(Task.CompletedTask);
 
             var result = await _documentService.AddDocumentAsync(request);
             

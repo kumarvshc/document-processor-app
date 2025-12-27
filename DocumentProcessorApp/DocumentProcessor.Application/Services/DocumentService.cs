@@ -87,7 +87,7 @@ namespace DocumentProcessor.Application.Services
 
         public async Task PublishDocumentCreatedAsync(Domain.Entities.Document document, CancellationToken cancellationToken = default)
         {
-            await _messagePublisher.PublishDocumentCreatedAsync(document.Id, document.FileName, document.Content, cancellationToken);
+            await _messagePublisher.PublishDocumentCreatedAsync(document.Id, document.Content, cancellationToken);
         }
     }
 }
