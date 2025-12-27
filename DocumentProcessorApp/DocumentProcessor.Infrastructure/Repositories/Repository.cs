@@ -20,11 +20,6 @@ namespace DocumentProcessor.Infrastructure.Repositories
             await _dbSet.AddAsync(entity, cancellationToken);
         }
 
-        public virtual async Task<IEnumerable<T>> GetAllAsync(CancellationToken cancellationToken)
-        {
-            return await _dbSet.ToListAsync(cancellationToken);
-        }
-
         public virtual async Task<T?> GetByIdAsync(Guid id, CancellationToken cancellationToken)
         {
             return await _dbSet.FindAsync([id], cancellationToken);
