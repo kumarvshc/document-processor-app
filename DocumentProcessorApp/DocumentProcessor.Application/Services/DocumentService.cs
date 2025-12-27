@@ -38,14 +38,16 @@ namespace DocumentProcessor.Application.Services
 
         public async Task<Result<DocumentMatchesResponse>> GetDocumentMatchesAsync(Guid documentId, CancellationToken cancellationToken = default)
         {
-            var document = await _unitOfWork.Documents.GetByIdWithScanResultsAsync(documentId, cancellationToken);
+            var scanResults = await _unitOfWork.ScanResults.GetScanResultsByDocumentIdAsync(documentId, cancellationToken);
 
-            if (document is null)
+            if (!scanResults.Any())
             {
-                return Result<DocumentMatchesResponse>.Failure("Cannot find document for the given document id.");
+                return Result<DocumentMatchesResponse>.Failure("Cannot find scan results for the given document id.");
             }
 
-            var matches = document.ScanResults.Select(s => new ScanResultResponse(
+            var firstResult = scanResults.First();
+
+            var matches = scanResults.Select(s => new ScanResultResponse(
                 s.Id,
                 s.Position,
                 s.ScanType,
@@ -53,12 +55,15 @@ namespace DocumentProcessor.Application.Services
                 s.CreatedDateTime
                 ));
 
-            return Result<DocumentMatchesResponse>.Success(new DocumentMatchesResponse(document.Id, document.FileName, matches));
+            return Result<DocumentMatchesResponse>.Success(new DocumentMatchesResponse(
+                firstResult.Document.Id,
+                firstResult.Document.FileName,
+                matches));
         }
 
         public async Task<Result<DocumentStatusResponse>> GetDocumentStatusAsync(Guid documentId, CancellationToken cancellationToken = default)
         {
-            var document = await _unitOfWork.Documents.GetByIdWithScanResultsAsync(documentId, cancellationToken);
+            var document = await _unitOfWork.Documents.GetByIdAsync(documentId, cancellationToken);
 
             if (document is null)
             {
@@ -70,7 +75,7 @@ namespace DocumentProcessor.Application.Services
 
         public async Task<Result<DocumentTextResponse>> GetDocumentTextAsync(Guid documentId, CancellationToken cancellationToken = default)
         {
-            var document = await _unitOfWork.Documents.GetByIdWithScanResultsAsync(documentId, cancellationToken);
+            var document = await _unitOfWork.Documents.GetByIdAsync(documentId, cancellationToken);
 
             if (document is null)
             {

@@ -11,9 +11,11 @@ namespace DocumentProcessor.Infrastructure.Repositories
         {
         }
 
-        public async Task<IEnumerable<ScanResult>> GeDocumentScanStatusAsync(Guid documentId, CancellationToken cancellationToken = default)
+        public async Task<IReadOnlyCollection<ScanResult>> GetScanResultsByDocumentIdAsync(Guid documentId, CancellationToken cancellationToken = default)
         {
-            return await _dbSet.Where(s => s.DocumentId == documentId).ToListAsync(cancellationToken);
+            return await _dbSet.Where(s => s.DocumentId == documentId)
+                .Include(s => s.Document)
+                .ToListAsync(cancellationToken);
         }
     }
 }

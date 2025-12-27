@@ -6,5 +6,5 @@ public record ScanResultResponse(
     int Position,
     ScanType ScanType,
     string MatchedText,
-    DateTime CreatedAt
+    DateTime CreatedDateTime
 );

@@ -10,10 +10,5 @@ namespace DocumentProcessor.Infrastructure.Repositories
         public DocumentRepository( DocumentProcessorDbContext context) : base(context)
         {                
         }
-
-        public async Task<Document> GetByIdWithScanResultsAsync(Guid id, CancellationToken cancellationToken = default)
-        {
-            return await _dbSet.Include(d => d.ScanResults).FirstOrDefaultAsync(d => d.Id == id, cancellationToken);
-        }
     }
 }
