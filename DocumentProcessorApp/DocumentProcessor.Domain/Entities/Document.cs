@@ -1,4 +1,4 @@
-﻿using DocumentProcessor.Domain.Enums;
+using DocumentProcessor.Domain.Enums;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DocumentProcessor.Domain.Entities
@@ -50,11 +50,6 @@ namespace DocumentProcessor.Domain.Entities
         {
             Status = DocumentStatus.Available;
             ProcessedDateTime = DateTime.UtcNow;
-        }
-
-        public void MarkAsProcessing()
-        {
-            Status = DocumentStatus.Processing;
         }
     }
 }
