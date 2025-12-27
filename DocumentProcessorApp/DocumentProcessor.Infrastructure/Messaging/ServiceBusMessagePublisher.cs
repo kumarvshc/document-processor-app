@@ -1,6 +1,7 @@
 ﻿using Azure.Messaging.ServiceBus;
 using DocumentProcessor.Domain.Interfaces;
 using DocumentProcessor.Domain.Messages;
+using System.Text.RegularExpressions;
 
 namespace DocumentProcessor.Infrastructure.Messaging
 {
@@ -29,11 +30,9 @@ namespace DocumentProcessor.Infrastructure.Messaging
             await _keyScanQueueSender.SendMessageAsync(sbMessage, cancellationToken);
         }
 
-        public async Task PublishScanCompletedAsync(Guid documentId, string content, bool isDangerous, List<(int Position, string MatchedText)> dangerousMatches, CancellationToken cancellationToken = default)
+        public async Task PublishScanCompletedAsync(Guid documentId, string content, CancellationToken cancellationToken = default)
         {
-            var matches = dangerousMatches.Select(s => new ScanResultDto(s.Position, s.MatchedText)).ToList();
-
-            var message = new ScanCompletedMessage(documentId, content, isDangerous, matches);
+            var message = new ScanCompletedMessage(documentId, content);
 
             var sbMessage = new ServiceBusMessage(BinaryData.FromObjectAsJson(message))
             {

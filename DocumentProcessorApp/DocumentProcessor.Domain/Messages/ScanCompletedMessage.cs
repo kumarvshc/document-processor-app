@@ -2,9 +2,5 @@
 
 public record ScanCompletedMessage(
     Guid DocumentId,
-    string Content,
-    bool IsDangerous,
-    List<ScanResultDto> DangerousMatches
+    string Content
 );
-
-public record ScanResultDto(int Position, string MatchedText);
