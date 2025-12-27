@@ -236,12 +236,18 @@ Adopted for serverless, event-driven background processing. Functions automatica
 
 ---
 
-# Design Trade-Off
+## Design Trade-Off - I
 
-Instead of passing only the **Document ID** to the Azure Service Bus queue (since the document content already exists in the `Documents` table), we are currently passing the **document content** itself.
+Instead of passing only the **Document ID** to the Azure Service Bus queue (since the document content already exists in the `Documents` table), I am currently passing the **document content** itself.
 
 ## Reason
 - The content size is small (maximum **1 KB**), so including it in the message reduces the need for an additional database lookup.
 - This approach minimizes latency and simplifies processing at the consumer end.
+
+
+## Design Trade-Off - II
+
+Currently, transactions are **not used anywhere else in the application**.  
+However, I have included a **basic transaction implementation** in this module to **demonstrate how it could be integrated in the future**.
 
 ---
