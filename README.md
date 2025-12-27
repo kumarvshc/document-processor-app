@@ -179,7 +179,7 @@ The application can be executed using either of the following approaches:
 ## Status Flow
 
 ```text
-Created → Processing → Available
+Unknown → Processing → Available
 ```
 
 ---
