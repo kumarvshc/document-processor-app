@@ -1,11 +1,9 @@
 // Configure Serilog
 using DocumentProcessor.Api;
-using DocumentProcessor.Api.HealthCheck;
 using DocumentProcessor.Api.Middleware;
 using DocumentProcessor.Infrastructure.Data;
 using FluentValidation;
 using FluentValidation.AspNetCore;
-using Microsoft.EntityFrameworkCore;
 using Serilog;
 using System.Text.Json.Serialization;
 
@@ -32,9 +30,7 @@ try
 
     // Add FluentValidation
     builder.Services.AddFluentValidationAutoValidation();
-    builder.Services.AddValidatorsFromAssemblyContaining<Program>();
-
-    builder.Services.AddControllers();
+    builder.Services.AddValidatorsFromAssemblyContaining<Program>();    
 
     // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
     builder.Services.AddEndpointsApiExplorer();
@@ -45,12 +41,12 @@ try
         {
             Title = "Document Processor API",
             Version = "v1",
-            Description = "Dcument Processor API "
+            Description = "Document Processor API"
         });
     });
 
     // Add Health Checks
-    builder.Services.AddHealthChecks().AddCheck<HealtchCheck>("doc-processor-health-check");
+    builder.Services.AddHealthChecks().AddDbContextCheck<DocumentProcessorDbContext>("database-health-check");
 
     builder.Services.RegisterDependencies(builder);
 
@@ -68,16 +64,16 @@ try
         app.UseSwagger();
         app.UseSwaggerUI();
     }
+    
+    // Add Serilog request logging
+    app.UseSerilogRequestLogging();
 
     // Configure exception handling middleware
     app.UseMiddleware<ExceptionHandlingMiddleware>();
 
     app.UseHsts();
 
-    app.UseHttpsRedirection();
-
-    // Add Serilog request logging
-    app.UseSerilogRequestLogging();
+    app.UseHttpsRedirection();   
 
     app.UseAuthorization();
 
@@ -88,6 +84,10 @@ try
 
     app.Run();
 
+}
+catch (Exception ex)
+{
+    Log.Fatal(ex, "Application terminated unexpectedly.");
 }
 finally
 {

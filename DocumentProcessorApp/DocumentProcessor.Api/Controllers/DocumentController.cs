@@ -21,19 +21,13 @@ namespace DocumentProcessor.Api.Controllers
         }
 
         [HttpPost]
-        [ProducesResponseType(typeof(AddDocumentApiResponse), StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(AddDocumentApiResponse), StatusCodes.Status200OK)]       
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status422UnprocessableEntity)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> AddDocument([FromBody] AddDocumentApiRequest request, CancellationToken cancellationToken)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
             var applicationRequest = _mapper.Map<AddDocumentRequest>(request);
 
             var result = await _documentService.AddDocumentAsync(applicationRequest, cancellationToken);
@@ -118,6 +112,7 @@ namespace DocumentProcessor.Api.Controllers
                 {
                     StatusCodes.Status422UnprocessableEntity => "Business Rule Violation",
                     StatusCodes.Status400BadRequest => "Bad Request",
+                    StatusCodes.Status404NotFound => "Not Found",
                     StatusCodes.Status500InternalServerError => "Internal Server Error",
                     _ => "Error"
                 },

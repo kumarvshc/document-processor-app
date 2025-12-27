@@ -1,5 +1,4 @@
 ﻿using DocumentProcessor.Application.DTO.Response;
-using DocumentProcessor.Domain.Enums;
 
 namespace DocumentProcessor.Api.DTO.Response;
 
