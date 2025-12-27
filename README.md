@@ -12,7 +12,7 @@ The application reads files from a specified folder path and processes them sequ
 
 ---
 
-## Requirements
+## Prerequisites
 - .NET 8 or later
 - FluentValidation for input validation
 - Serilog for structured logging
@@ -31,14 +31,6 @@ The application reads files from a specified folder path and processes them sequ
 - Detects word positions within text files.
 - Matches user-defined regular expression patterns.
 - Stores processed results in an Azure SQL Database.
-
----
-
-## How It Works
-1. Specify the folder path containing the files.
-2. The processor reads each file one by one.
-3. Performs word position detection and regex pattern matching.
-4. Captures and stores the results in an SQL database for further processing.
 
 ---
 
@@ -84,6 +76,15 @@ Additionaly created **Common** and **Conatants** layer to supporting maintain cl
 ---
 
 # Document Processor System
+
+
+## How It Works
+1. Specify the folder path containing the files.
+2. The processor reads each file one by one.
+3. Performs word position detection and regex pattern matching.
+4. Captures and stores the results in an SQL database for further processing.
+
+---
 
 ## Application Execution Options
 
