@@ -85,10 +85,6 @@ Additionaly created **Common** and **Conatants** layer to supporting maintain cl
 
 # Document Processor System
 
-This project implements a scalable **Document Processing System** following **Clean Architecture** principles with synchronous and asynchronous (distributed) processing.
-
----
-
 ## Application Execution Options
 
 The application can be executed using either of the following approaches:
