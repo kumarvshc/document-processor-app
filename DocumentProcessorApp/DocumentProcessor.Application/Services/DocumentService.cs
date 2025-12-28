@@ -31,8 +31,7 @@ namespace DocumentProcessor.Application.Services
                 document.Id,
                 document.FileName,
                 document.Status,
-                document.CreatedDateTime,
-                document.ProcessedDateTime
+                document.CreatedDateTime
                 ));
         }
 
@@ -58,6 +57,7 @@ namespace DocumentProcessor.Application.Services
             return Result<DocumentMatchesResponse>.Success(new DocumentMatchesResponse(
                 firstResult.Document.Id,
                 firstResult.Document.FileName,
+                firstResult.Document.ProcessedDateTime,
                 matches));
         }
 
