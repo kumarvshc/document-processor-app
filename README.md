@@ -20,7 +20,7 @@ The application reads files from a specified folder path and processes them sequ
 - Swagger for Api testing
 - Moq for unit testing and mocking
 - Azure Service Bus for messaging
-- Azure SQL Database for data storage
+- Azure SQL Database for data storage (can use Azure Data Studio instead of Sql Server Managment tool)
 - Azure Functions for serverless processing
 
 ---
