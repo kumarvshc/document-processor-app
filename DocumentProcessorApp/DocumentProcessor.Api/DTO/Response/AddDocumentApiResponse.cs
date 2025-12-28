@@ -6,5 +6,4 @@ public record AddDocumentApiResponse(
  Guid Id,
  string FileName,
  DocumentStatus Status,
- DateTime CreatedDateTime,
- DateTime? ProcessedDateTime);
+ DateTime CreatedDateTime);
