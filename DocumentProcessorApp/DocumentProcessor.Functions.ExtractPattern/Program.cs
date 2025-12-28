@@ -17,11 +17,6 @@ var host = new HostBuilder()
 
         // Add Repositories
         services.AddScoped<IUnitOfWork, UnitOfWork>();
-
-        // Add Service Bus
-        var serviceBusConnection = Environment.GetEnvironmentVariable("ServiceBusConnection");
-        services.AddSingleton(new ServiceBusClient(serviceBusConnection));
-        services.AddSingleton<IServiceBusMessagePublisher, ServiceBusMessagePublisher>();
     })
     .Build();
 host.Run();
