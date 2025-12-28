@@ -1,7 +1,5 @@
-﻿using Azure.Messaging.ServiceBus;
-using DocumentProcessor.Domain.Interfaces;
+﻿using DocumentProcessor.Domain.Interfaces;
 using DocumentProcessor.Infrastructure.Data;
-using DocumentProcessor.Infrastructure.Messaging;
 using DocumentProcessor.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
