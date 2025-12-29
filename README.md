@@ -215,7 +215,7 @@ dotnet run
 - Add comprehensive unit tests for all components.
 - A CI/CD pipeline should be created.
 - Optionally, create an Azure App Service and host the API.
-- Bicep has not yet been tested, so do not rely on this script to create a neccessary Azure services.
+- Bicep has not yet been tested (it has been created through Azure portal Automation), so do not rely on this script to create a neccessary Azure services.
 - This project should be validated using any one of the Static Code Analysis tools (eg: SonarQube)
 
 ---
