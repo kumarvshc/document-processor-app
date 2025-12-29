@@ -54,7 +54,6 @@ jobs:
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'doc-processor-api'
-          # omit slot-name or set 'production'; for non-prod slots use the exact slot name
-          slot-name: 'production'
           package: "${{ github.workspace }}\\deploy"
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_42EF6043155A4BB683D98795D8D14C02 }}
+
