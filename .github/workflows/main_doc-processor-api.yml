@@ -61,5 +61,5 @@ jobs:
         with:
           app-name: 'doc-processor-api'
           slot-name: 'Production'
-          package: .
+          package: ${{ github.workspace }}/.net-app
           
