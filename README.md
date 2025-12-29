@@ -236,18 +236,31 @@ Adopted for serverless, event-driven background processing. Functions automatica
 
 ---
 
-## Design Trade-Off - I
+## Design Trade-Off - Document Id and Content
 
-Instead of passing only the **Document ID** to the Azure Service Bus queue (since the document content already exists in the `Documents` table), I am currently passing the **document content** itself.
+Instead of passing only the **Document Id** to the Azure Service Bus queue (since the document content already exists in the `Documents` table), I am currently passing the **document content** itself.
 
-## Reason
+### Reason
 - The content size is small (maximum **1 KB**), so including it in the message reduces the need for an additional database lookup.
 - This approach minimizes latency and simplifies processing at the consumer end.
 
 
-## Design Trade-Off - II
+## Design Trade-Off - Transaction Design
 
 Currently, transactions are **not used anywhere else in the application**.  
 However, I have included a **basic transaction implementation** in this module to **demonstrate how it could be integrated in the future**.
+
+# Design Trade-Off: Direct Application Layer Calls vs. API Calls
+
+## Current Approach
+Azure Functions (`KeyScannerFunction` and `ExtractPatternFunction`) invoke the application layer directly using **dependency injection** (`IUnitOfWork` and `IMessageService`) instead of making HTTP calls to the API.
+
+## Reason
+
+1. **Shared Application Boundary**  
+   Both Azure Functions and the application layer belong to the same logical boundary, making direct calls a natural fit.
+
+2. **Lower Latency**  
+   Avoiding HTTP overhead reduces round-trip time, resulting in faster execution.
 
 ---
