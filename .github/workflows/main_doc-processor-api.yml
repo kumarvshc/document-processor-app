@@ -24,7 +24,10 @@ jobs:
           dotnet-version: '8.x'
 
       - name: Build with dotnet
-        run: dotnet build --configuration Release
+        run: |
+          dotnet publish "DocumentProcessorApp/DocumentProcessor.Api/DocumentProcessor.Api.csproj" `
+            --configuration Release `
+            --output "${{ github.workspace }}/myapp"
 
       - name: dotnet publish
         run: dotnet publish -c Release -o "${{env.DOTNET_ROOT}}/myapp"
@@ -33,7 +36,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: .net-app
-          path: ${{env.DOTNET_ROOT}}/myapp
+          path: "${{ github.workspace }}/myapp"
 
   deploy:
     runs-on: windows-latest
@@ -52,4 +55,5 @@ jobs:
           app-name: 'doc-processor-api'
           slot-name: 'Production'
           package: .
+
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_42EF6043155A4BB683D98795D8D14C02 }}
