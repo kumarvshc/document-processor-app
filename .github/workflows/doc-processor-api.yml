@@ -20,12 +20,6 @@ jobs:
         with:
           dotnet-version: '8.x'
 
-      - name: Restore
-        run: dotnet restore DocumentProcessorApp/DocumentProcessor.Api/DocumentProcessor.Api.csproj
-
-      - name: Build
-        run: dotnet build DocumentProcessorApp/DocumentProcessor.Api/DocumentProcessor.Api.csproj --configuration Release --no-restore
-
       - name: Publish
         run: >
           dotnet publish
@@ -56,4 +50,5 @@ jobs:
           app-name: 'doc-processor-api'
           package: "${{ github.workspace }}\\deploy"
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+
 
