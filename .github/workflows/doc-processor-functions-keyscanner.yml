@@ -34,7 +34,8 @@ jobs:
         with:
           app-name: 'doc-processor-function-app'
           package: "${{ github.workspace }}\\publish"
-          publish-profile: ${{ secrets.AZURE_FUNCTIONS_KEYSCANNER_PUBLISH_PROFILE }}
+          publish-profile: ${{ secrets.AZURE_FUNCTIONS_PUBLISH_PROFILE }}
+
 
 
 
