@@ -1,15 +1,17 @@
 ﻿// See https://aka.ms/new-console-template for more information
+using DocumentProcessor.Constants;
 using System.Net.Http.Json;
-using static System.Net.WebRequestMethods;
 
 Console.WriteLine("=== Document Processor Console Client ===\n\n");
 
 await Task.Delay(15000);
 
-var apiBaseUrl = "https://localhost:7088";
+var apiBaseUrl = Constants.CONST_DOC_PROCESSOR_API_BASEURL;
+
 var directoryToScan = @"C:\DocProcessConsoleTest";
 
 Console.WriteLine($"API URL: {apiBaseUrl}");
+
 Console.WriteLine($"Scanning directory {directoryToScan}");
 
 if(!Directory.Exists(directoryToScan))
@@ -18,11 +20,9 @@ if(!Directory.Exists(directoryToScan))
     return;
 }
 
-
 using var httpClient = new HttpClient { BaseAddress = new Uri(apiBaseUrl) };
 
-var successCount = 0;
-var failCount = 0;
+int successCount = 0, failCount = 0;
 
 bool continueProcessing = false;
 
@@ -43,7 +43,6 @@ do
     {
         var fileName = Path.GetFileName(filePath);
         Console.WriteLine($"Processing: {fileName}");
-
         try
         {
             var content = await System.IO.File.ReadAllTextAsync(filePath);
@@ -69,7 +68,7 @@ do
             }
             };
 
-            var response = await httpClient.PostAsJsonAsync("/api/document", request);
+            var response = await httpClient.PostAsJsonAsync(Constants.CONST_DOC_PROCESSOR_API_ADD_DOCUMENT_POST_URL, request);
 
             if (response.IsSuccessStatusCode)
             {

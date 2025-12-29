@@ -7,4 +7,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DocumentProcessor.Constants\DocumentProcessor.Constants.csproj" />
+  </ItemGroup>
+
 </Project>
