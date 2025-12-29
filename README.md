@@ -10,6 +10,8 @@
 
 The application reads files from a specified folder path and processes them sequentially, ensuring accurate and efficient text analysis.
 
+Azure App Service Api Swagger Url: `https://doc-processor-api.azurewebsites.net/swagger/index.html`
+
 ---
 
 ## Prerequisites
