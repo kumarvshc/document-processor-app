@@ -24,10 +24,10 @@ jobs:
           dotnet-version: '8.x'
 
       - name: Build with dotnet
-        run: dotnet build --configuration Release
+        run: dotnet build DocumentProcessorApp/DocumentProcessor.Api/DocumentProcessor.Api.csproj --configuration Release
 
       - name: dotnet publish
-        run: dotnet publish -c Release -o "${{env.DOTNET_ROOT}}/myapp"
+        run: dotnet publish DocumentProcessorApp/DocumentProcessor.Api/DocumentProcessor.Api.csproj --configuration Release --output ${{env.DOTNET_ROOT}}/publish
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
