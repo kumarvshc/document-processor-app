@@ -244,11 +244,14 @@ Instead of passing only the **Document Id** to the Azure Service Bus queue (sinc
 - The content size is small (maximum **1 KB**), so including it in the message reduces the need for an additional database lookup.
 - This approach minimizes latency and simplifies processing at the consumer end.
 
+---
 
 ## Design Trade-Off - Transaction Design
 
 Currently, transactions are **not used anywhere else in the application**.  
 However, I have included a **basic transaction implementation** in this module to **demonstrate how it could be integrated in the future**.
+
+---
 
 ## Design Trade-Off: Direct Application Layer Calls vs. API Calls
 
