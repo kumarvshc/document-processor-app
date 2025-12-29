@@ -53,8 +53,8 @@ jobs:
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'doc-processor-api'
-          slot-name: 'Production'
+          # slot-name: 'Production'
           package: .
-
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_42EF6043155A4BB683D98795D8D14C02 }}
+
 
