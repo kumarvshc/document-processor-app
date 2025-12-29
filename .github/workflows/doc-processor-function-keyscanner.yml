@@ -25,12 +25,12 @@ jobs:
       - name: Restore
         shell: pwsh
         run: |
-          dotnet restore ".\DocumentProcessor.Functions.KeyScanner\DocumentProcessor.Functions.KeyScanner.csproj"
+          dotnet restore "DocumentProcessor.Functions.KeyScanner\DocumentProcessor.Functions.KeyScanner.csproj"
 
       - name: Publish
         shell: pwsh
         run: |
-          dotnet publish ".\DocumentProcessor.Functions.KeyScanner\DocumentProcessor.Functions.KeyScanner.csproj" `
+          dotnet publish "DocumentProcessor.Functions.KeyScanner\DocumentProcessor.Functions.KeyScanner.csproj" `
             -c Release `
             -o ".\publish\KeyScanner"
 
@@ -40,3 +40,4 @@ jobs:
           app-name: 'doc-processor-function-app'
           package: 'publish/KeyScanner'
           publish-profile: ${{ secrets.AZURE_FUNCTIONS_KEYSCANNER_PUBLISH_PROFILE }}
+
