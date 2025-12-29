@@ -5,12 +5,22 @@
 
 **Document Processor** is a distributed application designed to analyze text files by performing two key operations:
 
-- **Word Position Detection**: Identify the exact positions of words within the file.
-- **Pattern Matching**: Search for and match regular expression patterns in the file content.
+- **1. Word Position Detection**: Identify the exact positions of words within the file.
+- **2. Pattern Matching**: Search for and match regular expression patterns in the file content.
 
-The application reads files from a specified folder path and processes them sequentially, ensuring accurate and efficient text analysis.
 
-Azure App Service Api Swagger Url: `https://doc-processor-api.azurewebsites.net/swagger/index.html`
+ - **Azure App Service (API)**  
+  Hosts the main API that orchestrates the entire processing flow.
+
+- **Azure Functions**  
+  Implements specialized tasks such as word position detection and pattern matching for scalability and performance.
+
+When you submit a request via the API’s Swagger UI or execute the console app to read the file from specified folder path to process them sequently the entire processing is executed in a single operation.
+
+**API Documentation**
+
+Access the Swagger UI for the hosted API here:  `https://doc-processor-api.azurewebsites.net/swagger/index.htm`
+
 
 ---
 
@@ -216,8 +226,6 @@ dotnet run
 - Remove hardcoded values and maintain them in a centralized constant class or xml file.
 - Replace hardcoded SQL and Azure Service Bus connection strings with Managed Identity or Azure Key Vault.
 - Add comprehensive unit tests for all components.
-- A CI/CD pipeline should be created.
-- Optionally, create an Azure App Service and host the API.
 - Bicep has not yet been tested (it has been created through Azure portal Automation), so do not rely on this script to create a neccessary Azure services.
 - This project should be validated using any one of the Static Code Analysis tools (eg: SonarQube).
 - Currently the projects are referenced as project. Going forward, they should reference NuGet packages.
