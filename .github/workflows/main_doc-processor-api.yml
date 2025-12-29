@@ -22,15 +22,15 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.x'
-
+          
       - name: Build with dotnet
+        run: dotnet build DocumentProcessorApp/DocumentProcessor.Api/DocumentProcessor.Api.csproj --configuration Release
+
+      - name: dotnet publish
         run: |
           dotnet publish "DocumentProcessorApp/DocumentProcessor.Api/DocumentProcessor.Api.csproj" `
             --configuration Release `
-            --output "${{ github.workspace }}/myapp"
-
-      - name: dotnet publish
-        run: dotnet publish -c Release -o "${{env.DOTNET_ROOT}}/myapp"
+            --output "${{ github.workspace }}/myapp"     
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
@@ -57,3 +57,4 @@ jobs:
           package: .
 
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_42EF6043155A4BB683D98795D8D14C02 }}
+
