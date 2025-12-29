@@ -36,7 +36,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: .net-app
-          path: "${{ github.workspace }}/myapp"
+          path: "${{ github.workspace }}/publish"
 
   deploy:
     runs-on: windows-latest
@@ -53,8 +53,9 @@ jobs:
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'doc-processor-api'
-          package: "${{ github.workspace }}/dotnet-app"
+          package: "${{ github.workspace }}/publish"
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_42EF6043155A4BB683D98795D8D14C02 }}
+
 
 
 
