@@ -217,7 +217,8 @@ dotnet run
 - A CI/CD pipeline should be created.
 - Optionally, create an Azure App Service and host the API.
 - Bicep has not yet been tested (it has been created through Azure portal Automation), so do not rely on this script to create a neccessary Azure services.
-- This project should be validated using any one of the Static Code Analysis tools (eg: SonarQube)
+- This project should be validated using any one of the Static Code Analysis tools (eg: SonarQube).
+- Currenlty the proejects are referrenced as project. Going forward it should references to Nuget packages.
 
 ---
 
