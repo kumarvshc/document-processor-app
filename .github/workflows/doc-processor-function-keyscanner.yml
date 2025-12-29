@@ -22,10 +22,8 @@ jobs:
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
-      - name: Restore
-        shell: pwsh
-        run: |
-          dotnet restore "DocumentProcessor.Functions.KeyScanner\DocumentProcessor.Functions.KeyScanner.csproj"
+      - name: Restore       
+        run:  dotnet restore DocumentProcessorApp/DocumentProcessor.Functions.KeyScanner/DocumentProcessor.Functions.KeyScanner.csproj
 
       - name: Publish
         shell: pwsh
@@ -40,4 +38,5 @@ jobs:
           app-name: 'doc-processor-function-app'
           package: 'publish/KeyScanner'
           publish-profile: ${{ secrets.AZURE_FUNCTIONS_KEYSCANNER_PUBLISH_PROFILE }}
+
 
