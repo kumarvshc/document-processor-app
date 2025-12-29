@@ -25,8 +25,8 @@ jobs:
 
       - name: Publish .NET app
         run: |
-          dotnet publish "DocumentProcessorApp/DocumentProcessor.Api/DocumentProcessor.Api.csproj" \
-            --configuration Release \
+          dotnet publish "DocumentProcessorApp/DocumentProcessor.Api/DocumentProcessor.Api.csproj" `
+            --configuration Release `
             --output "${{ github.workspace }}/myapp"
 
       - name: Upload artifact for deployment job
