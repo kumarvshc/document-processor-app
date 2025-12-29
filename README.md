@@ -250,12 +250,12 @@ Instead of passing only the **Document Id** to the Azure Service Bus queue (sinc
 Currently, transactions are **not used anywhere else in the application**.  
 However, I have included a **basic transaction implementation** in this module to **demonstrate how it could be integrated in the future**.
 
-# Design Trade-Off: Direct Application Layer Calls vs. API Calls
+## Design Trade-Off: Direct Application Layer Calls vs. API Calls
 
-## Current Approach
+### Current Approach
 Azure Functions (`KeyScannerFunction` and `ExtractPatternFunction`) invoke the application layer directly using **dependency injection** (`IUnitOfWork` and `IMessageService`) instead of making HTTP calls to the API.
 
-## Reason
+### Reason
 
 1. **Shared Application Boundary**  
    Both Azure Functions and the application layer belong to the same logical boundary, making direct calls a natural fit.
