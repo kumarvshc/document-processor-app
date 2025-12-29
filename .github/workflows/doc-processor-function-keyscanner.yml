@@ -10,8 +10,8 @@ on:
   workflow_dispatch:
 
 env:
-  AZURE_FUNCTIONAPP_PACKAGE_PATH: '.' # set this to the path to your web app project, defaults to the repository root
-  DOTNET_VERSION: '8.0.x' # set this to the dotnet version to use
+  AZURE_FUNCTIONAPP_PACKAGE_PATH: 'DocumentProcessorApp/DocumentProcessor.Functions.KeyScanner/DocumentProcessor.Functions.KeyScanner.csproj' 
+  DOTNET_VERSION: '8.0.x'
 
 jobs:
   build-and-deploy:
@@ -37,7 +37,7 @@ jobs:
         uses: Azure/functions-action@v1
         id: fa
         with:
-          app-name: 'doc-processor-function-app'
-          slot-name: 'Production'
+          app-name: 'doc-processor-function-app'         
           package: '${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_426EB259FE9D4B5ABC2AFB434E895D6F }}
+          publish-profile: ${{ secrets.AZURE_FUNCTIONS_KEYSCANNER_PUBLISH_PROFILE }}
+
