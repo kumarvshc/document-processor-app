@@ -42,6 +42,7 @@ The application reads files from a specified folder path and processes them sequ
 - **Result Pattern** – For consistent operation results.
 - **DDD Pattern** – For maintaining clear boundaries, and improving maintainability.
 - **Event-Driven** – For decoupling components and enabling asynchronous communication.
+- **Microservice** - For building independently deployable, loosely coupled services.
   
 ---
 
