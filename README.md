@@ -38,7 +38,7 @@ Access the Swagger UI for the hosted API here:  `https://doc-processor-api.azure
 
 ## Features
 - Distributed architecture for scalability.
-- Supports custom folder paths for file input.
+- Prompt the user to enter a folder path, then process all file(s) within that folder.
 - Detects word positions within text files.
 - Matches user-defined regular expression patterns.
 - Stores processed results in an Azure SQL Database.
@@ -88,7 +88,6 @@ Additionaly created **Common** and **Conatants** layer to supporting maintain cl
 ---
 
 # Document Processor System
-
 
 ## How It Works
 1. Specify the folder path containing the files.
