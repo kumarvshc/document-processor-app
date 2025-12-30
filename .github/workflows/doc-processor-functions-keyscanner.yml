@@ -4,6 +4,14 @@ name: Build and deploy .NET Azure Function App - KeyScanner
 on:
   push:
     branches: [ main ]
+    paths:
+      - 'DocumentProcessorApp/DocumentProcessor.Functions.KeyScanner/**'
+      - 'DocumentProcessorApp/DocumentProcessor.Application/**'
+      - 'DocumentProcessorApp/DocumentProcessor.Common/**'
+      - 'DocumentProcessorApp/DocumentProcessor.Constants/**'
+      - 'DocumentProcessorApp/DocumentProcessor.Domain/**'
+      - 'DocumentProcessorApp/DocumentProcessor.Infrastructure/**'
+      - 'DocumentProcessorApp/DocumentProcessor.Tests/**'
   workflow_dispatch:
 
 env:
@@ -35,6 +43,7 @@ jobs:
           app-name: 'doc-processor-function-app'
           package: "${{ github.workspace }}\\publish"
           publish-profile: ${{ secrets.AZURE_FUNCTIONS_KEYSCANNER_PUBLISH_PROFILE }}
+
 
 
 
