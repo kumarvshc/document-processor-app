@@ -5,17 +5,13 @@
 		<TargetFramework>net8.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
-
 		<!-- Publish settings -->
 		<PublishSingleFile>true</PublishSingleFile>
 		<SelfContained>true</SelfContained>
 		<!-- Change if targeting Linux/macOS -->
 		<RuntimeIdentifier>win-x64</RuntimeIdentifier>
-		<!-- Optional: reduces size -->
-
-		<PublishTrimmed>true</PublishTrimmed>
+		<!-- Optional: reduces size -->		
 		<IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
-
 	</PropertyGroup>
 
 	<ItemGroup>
