@@ -16,7 +16,7 @@ on:
       - 'DocumentProcessor.Domain/**'
       - 'DocumentProcessor.Infrastructure/**'
       - '**/*.sln'
-  
+      
   pull_request:
     branches: [ main ]
     paths:
