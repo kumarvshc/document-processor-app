@@ -1,0 +1,93 @@
+
+name: Build & Commit Console EXE
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'DocumentProcessor.Console/**'
+      - 'DocumentProcessor.Api/**'
+      - 'DocumentProcessor.Application/**'
+      - 'DocumentProcessor.Common/**'
+      - 'DocumentProcessor.Constants/**'
+      - 'DocumentProcessor.Domain/**'
+      - 'DocumentProcessor.Infrastructure/**'
+      - '**/*.sln'
+      - '!releases/**'   # prevent infinite loop on binary-only commits
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'DocumentProcessor.Console/**'
+      - 'DocumentProcessor.Api/**'
+      - 'DocumentProcessor.Application/**'
+      - 'DocumentProcessor.Common/**'
+      - 'DocumentProcessor.Constants/**'
+      - 'DocumentProcessor.Domain/**'
+      - 'DocumentProcessor.Infrastructure/**'
+      - '**/*.sln'
+
+jobs:
+  build-and-commit:
+    runs-on: windows-latest
+    env:
+      DOTNET_VERSION: '8.0.x'
+      CONFIGURATION: Release
+      RID: win-x64
+      PUBLISH_DIR: out/console/${{ env.RID }}
+      RELEASES_DIR: releases/${{ env.RID }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Restore
+        run: dotnet restore DocumentProcessorApp.sln
+
+      - name: Build Solution
+        run: dotnet build DocumentProcessorApp.sln -c ${{ env.CONFIGURATION }} --no-restore
+
+      - name: Run Tests
+        run: dotnet test DocumentProcessor.Tests/DocumentProcessor.Tests.csproj -c ${{ env.CONFIGURATION }} --no-build --logger "trx;LogFileName=test-results.trx"
+
+      - name: Publish Console (self-contained single-file)
+        run: dotnet publish DocumentProcessor.Console/DocumentProcessor.Console.csproj -c ${{ env.CONFIGURATION }} -r ${{ env.RID }} --self-contained true /p:PublishSingleFile=true /p:PublishTrimmed=true -o ${{ env.PUBLISH_DIR }}
+
+      - name: Prepare releases folder
+        run: |
+          if not exist "${{ env.RELEASES_DIR }}" mkdir "${{ env.RELEASES_DIR }}"
+          copy /y "${{ env.PUBLISH_DIR }}\*.exe" "${{ env.RELEASES_DIR }}\"
+          echo Build SHA: %GITHUB_SHA%
+          dir "${{ env.RELEASES_DIR }}"
+
+      - name: Configure Git (ci-bot)
+        run: |
+          git config user.name "ci-bot"
+          git config user.email "ci-bot@users.noreply.github.com"
+
+      - name: Commit updated exe
+        env:
+          GH_TOKEN: ${{ secrets.BOT_TOKEN }}
+        run: |
+          git add "${{ env.RELEASES_DIR }}"
+          git status
+          git diff --cached --name-only
+
+          REM Skip commit if no changes
+          git commit -m "CI: update console exe for ${GITHUB_SHA}" || echo "No changes to commit."
+
+          REM Push back to the same branch
+          git push https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }} HEAD:${{ github.ref }}
+
+      - name: Upload Artifact (for build logs)
+        uses: actions/upload-artifact@v4
+        with:
+          name: console-exe-${{ env.RID }}
+          path: ${{ env.PUBLISH_DIR }}
+          if-no-files-found: error
