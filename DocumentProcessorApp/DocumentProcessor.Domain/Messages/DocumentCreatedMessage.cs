@@ -2,6 +2,5 @@
 
 public record DocumentCreatedMessage(
     Guid DocumentId,
-    string Content,
-    DateTime CreatedDateTime
+    string Content
 );
