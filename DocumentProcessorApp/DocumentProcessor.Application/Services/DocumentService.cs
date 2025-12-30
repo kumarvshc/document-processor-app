@@ -9,12 +9,12 @@ namespace DocumentProcessor.Application.Services
     public class DocumentService : IDocumentService
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IMessageService _messageService;
+        private readonly IServiceBusMessageService _serviceBusMessageService;
 
-        public DocumentService(IUnitOfWork unitOfWork, IMessageService messageService)
+        public DocumentService(IUnitOfWork unitOfWork, IServiceBusMessageService serviceBusMessageService)
         {
             _unitOfWork = unitOfWork;
-            _messageService = messageService;
+            _serviceBusMessageService = serviceBusMessageService;
         }
 
         public async Task<Result<DocumentResponse>> AddDocumentAsync(AddDocumentRequest request, CancellationToken cancellationToken = default)
@@ -25,7 +25,7 @@ namespace DocumentProcessor.Application.Services
 
             await _unitOfWork.SaveChangesAsync(cancellationToken);
 
-            await _messageService.PublishDocumentCreatedAsync(document, cancellationToken);
+            await _serviceBusMessageService.PublishDocumentCreatedAsync(document, cancellationToken);
 
             return Result<DocumentResponse>.Success(new DocumentResponse(
                 document.Id,

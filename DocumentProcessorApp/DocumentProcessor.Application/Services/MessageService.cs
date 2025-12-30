@@ -4,7 +4,7 @@ using DocumentProcessor.Domain.Interfaces;
 
 namespace DocumentProcessor.Application.Services
 {
-    public class MessageService : IMessageService
+    public class MessageService : IServiceBusMessageService
     {
         private readonly IServiceBusMessagePublisher _messagePublisher;
 

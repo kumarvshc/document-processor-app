@@ -21,7 +21,7 @@ var host = new HostBuilder()
         services.AddScoped<IUnitOfWork, UnitOfWork>();
 
         // Add Document Services
-        services.AddScoped<IMessageService, MessageService>();
+        services.AddScoped<IServiceBusMessageService, MessageService>();
 
         // Add Service Bus
         var serviceBusConnection = Environment.GetEnvironmentVariable("ServiceBusConnection");
