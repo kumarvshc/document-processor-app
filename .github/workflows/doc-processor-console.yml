@@ -28,9 +28,6 @@ on:
       - 'DocumentProcessor.Domain/**'
       - 'DocumentProcessor.Infrastructure/**'
       - '**/*.sln'
-    paths-ignore:
-      - 'releases/**'
-
 jobs:
   build-and-commit:
     runs-on: windows-latest
