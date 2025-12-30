@@ -2,10 +2,9 @@
 name: Build & Copy Console EXE
 
 permissions:
-  contents: write  # allow pushing with GITHUB_TOKEN
+  contents: write 
 
 on:   
-
   workflow_dispatch:
     inputs:
       buildConfiguration:
