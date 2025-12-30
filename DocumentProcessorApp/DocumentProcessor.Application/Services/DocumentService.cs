@@ -19,7 +19,7 @@ namespace DocumentProcessor.Application.Services
 
         public async Task<Result<DocumentResponse>> AddDocumentAsync(AddDocumentRequest request, CancellationToken cancellationToken = default)
         {
-            var document = Domain.Entities.Document.Create(request.FileName, request.Content, request.Metadata, request.MaxContentSize);
+            var document = Domain.Entities.Document.Create(request.FileName, request.Content, request.Metadata);
 
             await _unitOfWork.Documents.AddAsync(document, cancellationToken);
 

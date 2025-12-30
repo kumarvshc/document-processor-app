@@ -22,7 +22,7 @@ namespace DocumentProcessor.Tests
         [Fact]
         public async Task AddDocumentAsync_EmptyFileName_ThrowsArgumentException()
         {
-            var request = new AddDocumentRequest("", "content", 1024, null);
+            var request = new AddDocumentRequest("", "content", null);
 
             await Assert.ThrowsAsync<ArgumentException>(() => _documentService.AddDocumentAsync(request));
         }
@@ -31,7 +31,7 @@ namespace DocumentProcessor.Tests
         [Fact]
         public async Task AddDocumentAsync_ValidRequest_ReturnsSuccess()
         {
-            var request = new AddDocumentRequest("test.txt", "content", 1024, null);
+            var request = new AddDocumentRequest("test.txt", "content", null);
 
             _unitOfWorkMock.Setup(u => u.Documents.AddAsync(It.IsAny<Document>(), It.IsAny<CancellationToken>())).Returns(Task.CompletedTask);
 

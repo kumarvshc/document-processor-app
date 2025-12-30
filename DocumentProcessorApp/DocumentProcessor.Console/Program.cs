@@ -73,7 +73,6 @@ do
             {
                 FileName = fileName,
                 Content = content,
-                MaxContentSize = 1024,
                 Metadata = new Dictionary<string, string>
             {
                 {"SourcePath" , filePath},
