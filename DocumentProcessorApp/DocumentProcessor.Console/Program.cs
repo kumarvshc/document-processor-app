@@ -1,6 +1,16 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using DocumentProcessor.Constants;
 using System.Net.Http.Json;
+using System.Text.Json;
+using System.Text.Json.Serialization.Metadata;
+
+
+var jsonOptions = new JsonSerializerOptions
+{
+    PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+    TypeInfoResolver = new DefaultJsonTypeInfoResolver()
+};
+
 
 Console.WriteLine("=== Document Processor Console Client ===\n\n");
 
@@ -81,7 +91,7 @@ do
             }
             };
 
-            var response = await httpClient.PostAsJsonAsync(Constants.CONST_DOC_PROCESSOR_API_ADD_DOCUMENT_POST_URL, request);
+            var response = await httpClient.PostAsJsonAsync(Constants.CONST_DOC_PROCESSOR_API_ADD_DOCUMENT_POST_URL, request, jsonOptions);
 
             if (response.IsSuccessStatusCode)
             {
