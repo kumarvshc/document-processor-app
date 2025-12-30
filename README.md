@@ -42,47 +42,6 @@ Download Console App [DocumentProcessor.Console.exe](doc-processor-consoleapp/ex
 
 ---
 
-## Design Patterns
-- **Factory Pattern** – For object creation.
-- **Repository Pattern** – For data access abstraction.
-- **Unit of Work** – For managing transactions.
-- **Dependency Injection** – For loose coupling and testability.
-- **Result Pattern** – For consistent operation results.
-- **DDD Pattern** – For maintaining clear boundaries, and improving maintainability.
-- **Event-Driven** – For decoupling components and enabling asynchronous communication.
-- **Microservice** - For building independently deployable, loosely coupled services.
-  
----
-
-## Design Principles
-- **SOLID** – Maintainable and scalable code.
-- **KISS** – Keep it simple and straightforward.
-- **DRY** – Avoid code duplication.
-- **YAGNI** – Implement only what is necessary.
-
----
-
-## Architecture
-
-The **Document Processor** application is designed with a clean and maintainable architecture that promotes separation of concerns and scalability. It follows a layered approach with the following components:
-
-- **Domain**  
-  Contains the core business logic, entities, and value objects that represent the problem statement.
-
-- **Infrastructure**  
-  Handles external concerns such as database access, messaging (Azure Service Bus).
-
-- **Application**  
-  Implements use cases and orchestrates interactions between the domain and infrastructure layers. Includes services, validators, and business workflows.
-
-- **API**  
-  Exposes endpoints for client interaction, leveraging the application layer for processing requests and returning responses.
-
-This architecture ensures clarity, testability, and adherence to best practices like **SOLID principles** and **clean architecture**.
-
-Additionaly created **Common** and **Conatants** layer to supporting maintain clean architecture. 
-
----
 
 # Document Processor System
 
@@ -182,6 +141,48 @@ The application can be executed using either of the following approaches:
 ```
 Unknown → Processing → Available
 ```
+
+---
+
+## Design Patterns
+- **Factory Pattern** – For object creation.
+- **Repository Pattern** – For data access abstraction.
+- **Unit of Work** – For managing transactions.
+- **Dependency Injection** – For loose coupling and testability.
+- **Result Pattern** – For consistent operation results.
+- **DDD Pattern** – For maintaining clear boundaries, and improving maintainability.
+- **Event-Driven** – For decoupling components and enabling asynchronous communication.
+- **Microservice** - For building independently deployable, loosely coupled services.
+  
+---
+
+## Design Principles
+- **SOLID** – Maintainable and scalable code.
+- **KISS** – Keep it simple and straightforward.
+- **DRY** – Avoid code duplication.
+- **YAGNI** – Implement only what is necessary.
+
+---
+
+## Architecture
+
+The **Document Processor** application is designed with a clean and maintainable architecture that promotes separation of concerns and scalability. It follows a layered approach with the following components:
+
+- **Domain**  
+  Contains the core business logic, entities, and value objects that represent the problem statement.
+
+- **Infrastructure**  
+  Handles external concerns such as database access, messaging (Azure Service Bus).
+
+- **Application**  
+  Implements use cases and orchestrates interactions between the domain and infrastructure layers. Includes services, validators, and business workflows.
+
+- **API**  
+  Exposes endpoints for client interaction, leveraging the application layer for processing requests and returning responses.
+
+This architecture ensures clarity, testability, and adherence to best practices like **SOLID principles** and **clean architecture**.
+
+Additionaly created **Common** and **Conatants** layer to supporting maintain clean architecture. 
 
 ---
 
