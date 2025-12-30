@@ -184,6 +184,30 @@ This architecture ensures clarity, testability, and adherence to best practices 
 
 Additionaly created **Common** and **Conatants** layer to supporting maintain clean architecture. 
 
+## Architecture Diagram
+
+```mermaid
+flowchart LR
+    ConsoleApp[Console Application]
+    Swagger[Swagger UI]
+    API[Document Processor API]
+    AppLayer[Application Layer]
+    Infra[Infrastructure Layer]
+    SQL[(Azure SQL Database)]
+    Bus[(Azure Service Bus)]
+    Scanner[Scanner Azure Function]
+    Extract[Extract Pattern Function]
+
+    ConsoleApp --> API
+    Swagger --> API
+    API --> AppLayer
+    AppLayer --> Infra
+    Infra --> SQL
+    AppLayer --> Bus
+    Bus --> Scanner
+    Scanner --> Extract
+    Extract --> SQL
+
 ---
 
 ## Usage
