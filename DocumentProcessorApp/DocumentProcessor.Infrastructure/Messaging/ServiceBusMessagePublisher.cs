@@ -17,7 +17,7 @@ namespace DocumentProcessor.Infrastructure.Messaging
 
         public async Task PublishDocumentCreatedAsync(Guid documentId, string content, CancellationToken cancellationToken = default)
         {
-            var message = new DocumentCreatedMessage(documentId, content, DateTime.UtcNow);
+            var message = new DocumentCreatedMessage(documentId, content);
 
             var sbMessage = new ServiceBusMessage(BinaryData.FromObjectAsJson(message))
             {

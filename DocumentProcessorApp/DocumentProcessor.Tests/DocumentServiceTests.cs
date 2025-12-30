@@ -10,19 +10,19 @@ namespace DocumentProcessor.Tests
     public class DocumentServiceTests
     {
         private readonly Mock<IUnitOfWork> _unitOfWorkMock;
-        private readonly Mock<IMessageService> _messageServiceMock;
+        private readonly Mock<IServiceBusMessageService> _serviceBusMessageServiceMock;
         private readonly DocumentService _documentService;
         public DocumentServiceTests()
         {
             _unitOfWorkMock = new Mock<IUnitOfWork>();
-            _messageServiceMock = new Mock<IMessageService>();
-            _documentService = new DocumentService(_unitOfWorkMock.Object, _messageServiceMock.Object);
+            _serviceBusMessageServiceMock = new Mock<IServiceBusMessageService>();
+            _documentService = new DocumentService(_unitOfWorkMock.Object, _serviceBusMessageServiceMock.Object);
         }
 
         [Fact]
         public async Task AddDocumentAsync_EmptyFileName_ThrowsArgumentException()
         {
-            var request = new AddDocumentRequest("", "content", 1024, null);
+            var request = new AddDocumentRequest("", "content", null);
 
             await Assert.ThrowsAsync<ArgumentException>(() => _documentService.AddDocumentAsync(request));
         }
@@ -31,13 +31,13 @@ namespace DocumentProcessor.Tests
         [Fact]
         public async Task AddDocumentAsync_ValidRequest_ReturnsSuccess()
         {
-            var request = new AddDocumentRequest("test.txt", "content", 1024, null);
+            var request = new AddDocumentRequest("test.txt", "content", null);
 
             _unitOfWorkMock.Setup(u => u.Documents.AddAsync(It.IsAny<Document>(), It.IsAny<CancellationToken>())).Returns(Task.CompletedTask);
 
             _unitOfWorkMock.Setup(u => u.SaveChangesAsync(It.IsAny<CancellationToken>())).ReturnsAsync(1);
 
-            _messageServiceMock.Setup(m => m.PublishDocumentCreatedAsync(It.IsAny<Document>(), It.IsAny<CancellationToken>())).Returns(Task.CompletedTask);
+            _serviceBusMessageServiceMock.Setup(m => m.PublishDocumentCreatedAsync(It.IsAny<Document>(), It.IsAny<CancellationToken>())).Returns(Task.CompletedTask);
 
             var result = await _documentService.AddDocumentAsync(request);
             

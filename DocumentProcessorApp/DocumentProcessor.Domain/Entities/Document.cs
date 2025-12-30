@@ -22,13 +22,13 @@ namespace DocumentProcessor.Domain.Entities
 
         }
 
-        public static Document Create(string fileName, string content, Dictionary<string,string> metadata, int maxContentSize = 1024)
+        public static Document Create(string fileName, string content, Dictionary<string,string> metadata)
         {
             if (string.IsNullOrWhiteSpace(fileName))
                 throw new ArgumentException("File name cannot be empty.", nameof(fileName));
 
-            if (content.Length > maxContentSize)
-                throw new ArgumentException($"Document content cannot be exceed {maxContentSize}KB", nameof(content));
+            if (content.Length > 1024)
+                throw new ArgumentException($"Document content cannot be exceed 1KB", nameof(content));
 
             return new Document
             {

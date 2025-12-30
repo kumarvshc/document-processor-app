@@ -4,21 +4,33 @@ using System.Net.Http.Json;
 
 Console.WriteLine("=== Document Processor Console Client ===\n\n");
 
-await Task.Delay(15000);
+Console.Write("Please enter the directory path to scan the text files for processing: ");
+
+var directoryToScan = Console.ReadLine();
+
+bool isInValidDirectoryPath = false;
+
+do
+{
+    if (!Directory.Exists(directoryToScan))
+    {
+        isInValidDirectoryPath = true;
+
+        Console.WriteLine($"Error: Directory '{directoryToScan}' does not exist.\n");
+
+        Console.Write("Please enter the valid directory path to scan the text files for processing: ");
+
+        directoryToScan = Console.ReadLine();
+    }
+    else
+    {
+        isInValidDirectoryPath = false;
+    }
+} while (isInValidDirectoryPath);
 
 var apiBaseUrl = Constants.CONST_DOC_PROCESSOR_API_BASEURL;
 
-var directoryToScan = @"C:\DocProcessConsoleTest";
-
-Console.WriteLine($"API URL: {apiBaseUrl}");
-
-Console.WriteLine($"Scanning directory {directoryToScan}");
-
-if(!Directory.Exists(directoryToScan))
-{
-    Console.WriteLine($"Error: Directory '{directoryToScan}' does not exist.");
-    return;
-}
+Console.WriteLine($"\nAPI URL: {apiBaseUrl}");
 
 using var httpClient = new HttpClient { BaseAddress = new Uri(apiBaseUrl) };
 
@@ -28,6 +40,8 @@ bool continueProcessing = false;
 
 do
 {
+    Console.WriteLine($"Scanning directory {directoryToScan}");
+
     var txtFiles = Directory.GetFiles(directoryToScan, "*.txt", SearchOption.TopDirectoryOnly);
 
     if (txtFiles.Length == 0)
@@ -59,7 +73,6 @@ do
             {
                 FileName = fileName,
                 Content = content,
-                MaxContentSize = 1024,
                 Metadata = new Dictionary<string, string>
             {
                 {"SourcePath" , filePath},

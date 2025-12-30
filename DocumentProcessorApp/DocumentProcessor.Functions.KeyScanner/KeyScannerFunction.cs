@@ -11,12 +11,12 @@ namespace DocumentProcessor.Functions.KeyScanner
     public class KeyScannerFunction
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IMessageService _messageService;
+        private readonly IServiceBusMessageService _serviceBusMessageService;
 
-        public KeyScannerFunction(IUnitOfWork unitOfWork, IMessageService messageService)
+        public KeyScannerFunction(IUnitOfWork unitOfWork, IServiceBusMessageService serviceBusMessageService)
         {
             _unitOfWork = unitOfWork;
-            _messageService = messageService;
+            _serviceBusMessageService = serviceBusMessageService;
         }
 
         [Function("KeyScanDocument")]
@@ -54,7 +54,7 @@ namespace DocumentProcessor.Functions.KeyScanner
                 await _unitOfWork.SaveChangesAsync(cancellationToken);
             }
 
-            await _messageService.PublishScanCompletedAsync(documentMessage.DocumentId, documentMessage.Content, cancellationToken);
+            await _serviceBusMessageService.PublishScanCompletedAsync(documentMessage.DocumentId, documentMessage.Content, cancellationToken);
         }
     }
 }
