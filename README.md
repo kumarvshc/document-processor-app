@@ -8,21 +8,15 @@
 - **1. Word Position Detection**: Identify the exact positions of words within the file.
 - **2. Pattern Matching**: Search for and match regular expression patterns in the file content.
 
-**Azure App Service (API)**  
-  Hosts the main API that orchestrates the entire processing flow.
+## How It Works
+You can initiate processing in two ways:
+- **Swagger UI**  
+Submit requests through the hosted API’s Swagger interface for quick testing and integration.
+Access [Swagger UI](https://doc-processor-api.azurewebsites.net/swagger/index.html)
 
-**Azure Functions**  
-  Implements specialized tasks such as word position detection and pattern matching for scalability and performance.
-
-When you submit a request via the API’s Swagger UI or execute the console app to read the file from specified folder path to process them sequently the entire processing is executed in a single operation.
-
-**API Documentation**
-
-Access the Swagger UI for the hosted API here:  [Swagger UI](https://doc-processor-api.azurewebsites.net/swagger/index.html)
-
-**Console App Exe**
-Download the Console App Exe here: [DocumentProcessor.Console.exe](doc-processor-consoleapp/exe/DocumentProcessor.Console.exe)
-
+-**Console Application**
+Execute the console app to read files from a specified folder path and process them sequentially in a single operation.
+Download Console App [DocumentProcessor.Console.exe](doc-processor-consoleapp/exe/DocumentProcessor.Console.exe)
 
 ---
 
@@ -91,14 +85,6 @@ Additionaly created **Common** and **Conatants** layer to supporting maintain cl
 ---
 
 # Document Processor System
-
-## How It Works
-1. Specify the folder path containing the files.
-2. The processor reads each file one by one.
-3. Performs word position detection and regex pattern matching.
-4. Captures and stores the results in an SQL database for further processing.
-
----
 
 ## Application Execution Options
 
