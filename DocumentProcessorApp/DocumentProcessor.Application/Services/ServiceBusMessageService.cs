@@ -4,11 +4,11 @@ using DocumentProcessor.Domain.Interfaces;
 
 namespace DocumentProcessor.Application.Services
 {
-    public class MessageService : IServiceBusMessageService
+    public class ServiceBusMessageService : IServiceBusMessageService
     {
         private readonly IServiceBusMessagePublisher _messagePublisher;
 
-        public MessageService(IServiceBusMessagePublisher messagePublisher)
+        public ServiceBusMessageService(IServiceBusMessagePublisher messagePublisher)
         {
             _messagePublisher = messagePublisher;
         }

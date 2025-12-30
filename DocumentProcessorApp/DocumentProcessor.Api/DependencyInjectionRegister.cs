@@ -37,7 +37,7 @@ namespace DocumentProcessor.Api
 
             // Add Application Services
             services.AddScoped<IDocumentService, DocumentService>();
-            services.AddScoped<IServiceBusMessageService, MessageService>();
+            services.AddScoped<IServiceBusMessageService, ServiceBusMessageService>();
 
             // Service Bus
             var serviceBusConnection = builder.Configuration.GetConnectionString("ServiceBusConnection")
