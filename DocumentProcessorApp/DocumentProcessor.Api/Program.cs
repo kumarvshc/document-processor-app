@@ -39,7 +39,7 @@ try
     {
         options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
         {
-            Title = "Document Processor API",
+            Title = "Document Processor API - Kumar Veerabadran",
             Version = "v1",
             Description = "Document Processor API"
         });
@@ -62,9 +62,14 @@ try
     if (app.Environment.IsDevelopment())
     {
         app.UseSwagger();
-        app.UseSwaggerUI();
+
+        app.UseSwaggerUI(c =>
+        {
+            c.DocumentTitle = "Document Processor API";
+        });
+
     }
-    
+
     // Add Serilog request logging
     app.UseSerilogRequestLogging();
 
