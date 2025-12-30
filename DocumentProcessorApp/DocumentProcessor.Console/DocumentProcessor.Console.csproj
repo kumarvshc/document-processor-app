@@ -12,6 +12,11 @@
 		<RuntimeIdentifier>win-x64</RuntimeIdentifier>
 		<!-- Optional: reduces size -->		
 		<IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
+
+
+		<PublishTrimmed>false</PublishTrimmed>
+		<PublishAot>false</PublishAot>
+
 	</PropertyGroup>
 
 	<ItemGroup>
