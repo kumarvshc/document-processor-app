@@ -18,7 +18,7 @@ When you submit a request via the API’s Swagger UI or execute the console app 
 
 **API Documentation**
 
-Access the Swagger UI for the hosted API here:  `https://doc-processor-api.azurewebsites.net/swagger/index.htm`
+Access the Swagger UI for the hosted API here:  `https://doc-processor-api.azurewebsites.net/swagger/index.html`
 
 
 ---
