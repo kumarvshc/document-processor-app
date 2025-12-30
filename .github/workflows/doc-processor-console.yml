@@ -1,6 +1,9 @@
 
 name: Build & Commit Console EXE
 
+permissions:
+  contents: write  # allow pushing with GITHUB_TOKEN
+
 on:
   push:
     branches: [ main ]
@@ -13,7 +16,8 @@ on:
       - 'DocumentProcessor.Domain/**'
       - 'DocumentProcessor.Infrastructure/**'
       - '**/*.sln'
-      - '!releases/**'   # prevent infinite loop on binary-only commits
+    paths-ignore:
+      - 'releases/**' 
   pull_request:
     branches: [ main ]
     paths:
@@ -25,22 +29,26 @@ on:
       - 'DocumentProcessor.Domain/**'
       - 'DocumentProcessor.Infrastructure/**'
       - '**/*.sln'
+    paths-ignore:
+      - 'releases/**'
 
 jobs:
   build-and-commit:
     runs-on: windows-latest
+
     env:
       DOTNET_VERSION: '8.0.x'
       CONFIGURATION: Release
-      RID: win-x64
-      PUBLISH_DIR: out/console/${{ env.RID }}
-      RELEASES_DIR: releases/${{ env.RID }}
+      RID: win-x64    
+      PUBLISH_DIR: out/console/win-x64
+      RELEASES_DIR: releases/win-x64
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           lfs: true
+          persist-credentials: true 
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
@@ -60,32 +68,27 @@ jobs:
         run: dotnet publish DocumentProcessor.Console/DocumentProcessor.Console.csproj -c ${{ env.CONFIGURATION }} -r ${{ env.RID }} --self-contained true /p:PublishSingleFile=true /p:PublishTrimmed=true -o ${{ env.PUBLISH_DIR }}
 
       - name: Prepare releases folder
+        shell: pwsh
         run: |
-          if not exist "${{ env.RELEASES_DIR }}" mkdir "${{ env.RELEASES_DIR }}"
-          copy /y "${{ env.PUBLISH_DIR }}\*.exe" "${{ env.RELEASES_DIR }}\"
-          echo Build SHA: %GITHUB_SHA%
-          dir "${{ env.RELEASES_DIR }}"
+          New-Item -ItemType Directory -Force -Path "${{ env.RELEASES_DIR }}" | Out-Null
+          Copy-Item "${{ env.PUBLISH_DIR }}\*" -Destination "${{ env.RELEASES_DIR }}" -Force
+          Get-ChildItem "${{ env.RELEASES_DIR }}"
 
-      - name: Configure Git (ci-bot)
+      - name: Commit updated exe
+        shell: bash
         run: |
           git config user.name "ci-bot"
           git config user.email "ci-bot@users.noreply.github.com"
 
-      - name: Commit updated exe
-        env:
-          GH_TOKEN: ${{ secrets.BOT_TOKEN }}
-        run: |
           git add "${{ env.RELEASES_DIR }}"
-          git status
-          git diff --cached --name-only
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "CI: update console exe for ${GITHUB_SHA}"
+            git push
+          fi
 
-          REM Skip commit if no changes
-          git commit -m "CI: update console exe for ${GITHUB_SHA}" || echo "No changes to commit."
-
-          REM Push back to the same branch
-          git push https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }} HEAD:${{ github.ref }}
-
-      - name: Upload Artifact (for build logs)
+      - name: Upload Artifact (optional)
         uses: actions/upload-artifact@v4
         with:
           name: console-exe-${{ env.RID }}
