@@ -21,7 +21,7 @@ When you submit a request via the API’s Swagger UI or execute the console app 
 Access the Swagger UI for the hosted API here:  [Swagger UI](https://doc-processor-api.azurewebsites.net/swagger/index.html)
 
 **Console App Exe**
-Access the Console App Exe here: [DocumentProcessor.Console.exe](doc-processor-consoleapp/exe/DocumentProcessor.Console.exe)
+Download the Console App Exe here: [DocumentProcessor.Console.exe](doc-processor-consoleapp/exe/DocumentProcessor.Console.exe)
 
 
 ---
