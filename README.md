@@ -46,15 +46,6 @@ Download Console App [DocumentProcessor.Console.exe](doc-processor-consoleapp/ex
 
 # Document Processor System
 
-## Application Execution Options
-
-The application can be executed using either of the following approaches:
-
-- **Console Application**
-- **Swagger (API UI)**
-
----
-
 ## Console Application Flow
 
 - The Console application reads files from a predefined directory.
