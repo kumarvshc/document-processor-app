@@ -1,14 +1,25 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>net8.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
 
-  <ItemGroup>
-    <ProjectReference Include="..\DocumentProcessor.Constants\DocumentProcessor.Constants.csproj" />
-  </ItemGroup>
+		<!-- Publish settings -->
+		<PublishSingleFile>true</PublishSingleFile>
+		<SelfContained>true</SelfContained>
+		<!-- Change if targeting Linux/macOS -->
+		<RuntimeIdentifier>win-x64</RuntimeIdentifier>
+		<!-- Optional: reduces size -->
+
+		<PublishTrimmed>true</PublishTrimmed>
+		<IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
+
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\DocumentProcessor.Constants\DocumentProcessor.Constants.csproj" />
+	</ItemGroup>
 
 </Project>
