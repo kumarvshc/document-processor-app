@@ -8,14 +8,14 @@ on:
   push:
     branches: [ main ]
     paths:
-      - 'DocumentProcessor.Console/**'
-      - 'DocumentProcessor.Api/**'
-      - 'DocumentProcessor.Application/**'
-      - 'DocumentProcessor.Common/**'
-      - 'DocumentProcessor.Constants/**'
-      - 'DocumentProcessor.Domain/**'
-      - 'DocumentProcessor.Infrastructure/**'
-      - '**/*.sln'
+      - 'DocumentProcessorApp/DocumentProcessor.Console/**'
+      - 'DocumentProcessorApp/DocumentProcessor.Api/**'
+      - 'DocumentProcessorApp/DocumentProcessor.Application/**'
+      - 'DocumentProcessorApp/DocumentProcessor.Common/**'
+      - 'DocumentProcessorApp/DocumentProcessor.Constants/**'
+      - 'DocumentProcessorApp/DocumentProcessor.Domain/**'
+      - 'DocumentProcessorApp/DocumentProcessor.Infrastructure/**'
+      
   workflow_dispatch:  
   
 jobs:
