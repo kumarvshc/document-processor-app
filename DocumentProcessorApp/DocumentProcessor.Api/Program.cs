@@ -48,7 +48,7 @@ try
     // Add Health Checks
     builder.Services.AddHealthChecks().AddDbContextCheck<DocumentProcessorDbContext>("database-health-check");
 
-    builder.Services.RegisterDependencies(builder);
+    await builder.Services.RegisterDependencies(builder);
 
     // Display the enum text instead of number
     builder.Services.AddControllers().AddJsonOptions(opt =>
