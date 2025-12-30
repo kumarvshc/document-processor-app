@@ -9,8 +9,8 @@
         public const string CONST_DOC_PROCESSOR_API_ADD_DOCUMENT_POST_URL = @"/api/document";
 
         // Note: For local development use below one
-        //public const string CONST_DOC_PROCESSOR_API_BASEURL = @"https://doc-processor-api.azurewebsites.net";
+        public const string CONST_DOC_PROCESSOR_API_BASEURL = @"https://doc-processor-api.azurewebsites.net";
         // Note: For local development use below one
-        public const string CONST_DOC_PROCESSOR_API_BASEURL = @"https://localhost:7088";
+        //public const string CONST_DOC_PROCESSOR_API_BASEURL = @"https://localhost:7088";
     }
 }
