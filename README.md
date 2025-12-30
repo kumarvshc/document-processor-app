@@ -186,6 +186,8 @@ Additionaly created **Common** and **Conatants** layer to supporting maintain cl
 
 ## Architecture Diagram
 
+![High-Level Architecture](docs/diagrams/high-level.png)
+
 ```mermaid
 flowchart LR
     ConsoleApp[Console Application]
