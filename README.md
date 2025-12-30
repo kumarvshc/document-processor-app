@@ -14,7 +14,7 @@ You can initiate processing in two ways:
 Submit requests through the hosted API’s Swagger interface for quick testing and integration.
 Access [Swagger UI](https://doc-processor-api.azurewebsites.net/swagger/index.html)
 
--**Console Application**
+- **Console Application**
 Execute the console app to read files from a specified folder path and process them sequentially in a single operation.
 Download Console App [DocumentProcessor.Console.exe](doc-processor-consoleapp/exe/DocumentProcessor.Console.exe)
 
