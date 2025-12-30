@@ -225,7 +225,6 @@ dotnet run
 ## Improvements Needed
 
 - Remove hardcoded values and maintain them in a centralized constant class or xml file.
-- Replace hardcoded SQL and Azure Service Bus connection strings with Managed Identity or Azure Key Vault.
 - Add comprehensive unit tests for all components.
 - Bicep has not yet been tested (it has been created through Azure portal Automation), so do not rely on this script to create a neccessary Azure services.
 - This project should be validated using any one of the Static Code Analysis tools (eg: SonarQube).
