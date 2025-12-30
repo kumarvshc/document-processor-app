@@ -4,17 +4,7 @@ name: Build & Copy Console EXE
 permissions:
   contents: write 
 
-on:   
-  workflow_dispatch:
-    inputs:
-      buildConfiguration:
-        description: "Build configuration (Debug/Release)"
-        required: true
-        default: "Release"
-      version:
-        description: "Console app version"
-        required: false
-        
+on:
   push:
     branches: [ main ]
     paths:
@@ -26,18 +16,8 @@ on:
       - 'DocumentProcessor.Domain/**'
       - 'DocumentProcessor.Infrastructure/**'
       - '**/*.sln'
-      
-  pull_request:
-    branches: [ main ]
-    paths:
-      - 'DocumentProcessor.Console/**'
-      - 'DocumentProcessor.Api/**'
-      - 'DocumentProcessor.Application/**'
-      - 'DocumentProcessor.Common/**'
-      - 'DocumentProcessor.Constants/**'
-      - 'DocumentProcessor.Domain/**'
-      - 'DocumentProcessor.Infrastructure/**'
-      - '**/*.sln'
+  workflow_dispatch:  
+  
 jobs:
   build-and-commit:
     runs-on: windows-latest
@@ -62,7 +42,7 @@ jobs:
           dotnet-version: ${{ env.DOTNET_VERSION }}
     
       - name: Publish Console (self-contained single-file)
-        run: dotnet publish DocumentProcessorApp/DocumentProcessor.Console/DocumentProcessor.Console.csproj -c ${{ env.CONFIGURATION }} -r ${{ env.RID }} --self-contained true /p:PublishSingleFile=true /p:PublishTrimmed=true -o ${{ env.PUBLISH_DIR }}
+        run: dotnet publish DocumentProcessorApp/DocumentProcessor.Console/DocumentProcessor.Console.csproj -c ${{ env.CONFIGURATION }} -r ${{ env.RID }} --self-contained true /p:PublishSingleFile=true /p:PublishTrimmed=true  /p:DebugType=None -o ${{ env.PUBLISH_DIR }}
 
       - name: Prepare releases folder
         shell: pwsh
