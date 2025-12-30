@@ -41,8 +41,19 @@ jobs:
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
     
-      - name: Publish Console (self-contained single-file)
-        run: dotnet publish DocumentProcessorApp/DocumentProcessor.Console/DocumentProcessor.Console.csproj -c ${{ env.CONFIGURATION }} -r ${{ env.RID }} --self-contained true /p:PublishSingleFile=true /p:PublishTrimmed=true  /p:DebugType=None -o ${{ env.PUBLISH_DIR }}
+      - name: Publish Console (self-contained single-file)        
+        run: |
+            dotnet publish
+            DocumentProcessorApp/DocumentProcessor.Console/DocumentProcessor.Console.csproj
+            -c ${{ env.CONFIGURATION }}
+            -r ${{ env.RID }}
+            --self-contained true
+            /p:PublishSingleFile=true
+            /p:PublishTrimmed=true
+            /p:DebugType=None
+            /p:DebugSymbols=false
+            /p:EmitDebugInformation=false
+            -o ${{ env.PUBLISH_DIR }}
 
       - name: Prepare releases folder
         shell: pwsh
