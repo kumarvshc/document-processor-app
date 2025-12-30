@@ -3,7 +3,6 @@ using System.Text.Json.Serialization;
 
 namespace DocumentProcessor.Console.Serialization
 {
-
     [JsonSourceGenerationOptions(
         PropertyNamingPolicy = JsonKnownNamingPolicy.CamelCase,
         DefaultIgnoreCondition = JsonIgnoreCondition.Never)]
@@ -11,5 +10,4 @@ namespace DocumentProcessor.Console.Serialization
     internal partial class AppJsonContext : JsonSerializerContext
     {
     }
-
 }
