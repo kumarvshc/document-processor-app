@@ -30,6 +30,7 @@ Download Console App [DocumentProcessor.Console.exe](doc-processor-consoleapp/ex
 - Azure Service Bus for messaging
 - Azure SQL Database for data storage (can use Azure Data Studio instead of Sql Server Managment tool)
 - Azure Functions for serverless processing
+- Azure Key Vault to keep credentials
 
 ---
 
