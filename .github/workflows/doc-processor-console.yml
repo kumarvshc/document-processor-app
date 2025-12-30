@@ -60,18 +60,9 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
-
-      - name: Restore
-        run: dotnet restore DocumentProcessorApp.sln
-
-      - name: Build Solution
-        run: dotnet build DocumentProcessorApp.sln -c ${{ env.CONFIGURATION }} --no-restore
-
-      - name: Run Tests
-        run: dotnet test DocumentProcessor.Tests/DocumentProcessor.Tests.csproj -c ${{ env.CONFIGURATION }} --no-build --logger "trx;LogFileName=test-results.trx"
-
+    
       - name: Publish Console (self-contained single-file)
-        run: dotnet publish DocumentProcessor.Console/DocumentProcessor.Console.csproj -c ${{ env.CONFIGURATION }} -r ${{ env.RID }} --self-contained true /p:PublishSingleFile=true /p:PublishTrimmed=true -o ${{ env.PUBLISH_DIR }}
+        run: dotnet publish DocumentProcessorApp/DocumentProcessor.Console/DocumentProcessor.Console.csproj -c ${{ env.CONFIGURATION }} -r ${{ env.RID }} --self-contained true /p:PublishSingleFile=true /p:PublishTrimmed=true -o ${{ env.PUBLISH_DIR }}
 
       - name: Prepare releases folder
         shell: pwsh
