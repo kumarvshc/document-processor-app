@@ -4,7 +4,17 @@ name: Build & Commit Console EXE
 permissions:
   contents: write  # allow pushing with GITHUB_TOKEN
 
-on:
+on:  
+  workflow_dispatch:
+    inputs:
+      buildConfiguration:
+        description: "Build configuration (Debug/Release)"
+        required: true
+        default: "Release"
+      version:
+        description: "Console app version"
+        required: false
+
   push:
     branches: [ main ]
     paths:
