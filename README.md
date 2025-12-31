@@ -48,7 +48,7 @@ Download Console App [DocumentProcessor.Console.exe](doc-processor-consoleapp/ex
 
 ## Console Application Flow
 
-- The Console application reads files from a predefined directory.
+- The Console application reads files from a user input directory.
 - The file path is **hardcoded in `Program.cs`**.
 - Files are processed **one by one**.
 - For each file:
