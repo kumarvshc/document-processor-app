@@ -1,5 +1,5 @@
 
-name: Build and deploy ASP.Net Core app to Azure Web App - doc-processor-api
+name: Build and deploy Document Processor API 
 
 on:
   push:
