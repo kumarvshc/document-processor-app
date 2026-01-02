@@ -40,7 +40,7 @@ jobs:
       - name: Deploy to Azure Functions (ExtractPattern)
         uses: Azure/functions-action@v1
         with:
-          app-name: 'doc-processor-function-app'
+          app-name: 'doc-processor-extractpattern-functionapp'
           package: "${{ github.workspace }}\\publish"
           publish-profile: ${{ secrets.AZURE_FUNCTIONS_PATTERNEXTRACT_PUBLISH_PROFILE }}
 
