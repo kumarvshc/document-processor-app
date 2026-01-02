@@ -1,5 +1,5 @@
 
-name: Build and deploy .NET Azure Function App - ExtractPattern
+name: Build and deploy ExtractPattern Azure Functions
 
 on:
   push:
