@@ -1,5 +1,5 @@
 
-name: Build and deploy .NET Azure Function App - KeyScanner
+name: Build and deploy KeyScanner Azure Functions
 
 on:
   push:
