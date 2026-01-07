@@ -205,7 +205,6 @@ dotnet run
 - Remove hardcoded values and maintain them in a centralized constant class or xml file.
 - Add comprehensive unit tests for all components.
 - Bicep has not yet been tested (it has been created through Azure portal Automation), so do not rely on this script to create a neccessary Azure services.
-- This project should be validated using any one of the Static Code Analysis tools (eg: SonarQube).
 - Currently the projects are referenced as project. Going forward, they should reference NuGet packages.
 
 ---
